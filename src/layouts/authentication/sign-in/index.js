@@ -60,9 +60,7 @@ function Basic({singIn, singInError}) {
   });
 
   const onSubmitHandler = (data) => {
-    singIn(data.email, data.password, () => {
-      navigate("/dashboard")
-    });
+    singIn(data.email, data.password, navigate);
     reset();
   };
 

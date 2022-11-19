@@ -35,7 +35,10 @@ import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 import Projects from "layouts/dashboard/components/Projects";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 
-function Dashboard() {
+function Dashboard({
+  measurementDevicesNum,
+  measurementActiveDevicesNum
+}) {
   const {sales, tasks} = reportsLineChartData;
 
   return (
@@ -46,38 +49,9 @@ function Dashboard() {
             <Grid item xs={12} md={6} lg={3}>
               <MDBox mb={1.5}>
                 <ComplexStatisticsCard
-                    color="dark"
-                    icon="weekend"
-                    title="Bookings"
-                    count={281}
-                    percentage={{
-                      color: "success",
-                      amount: "+55%",
-                      label: "than lask week",
-                    }}
-                />
-              </MDBox>
-            </Grid>
-            <Grid item xs={12} md={6} lg={3}>
-              <MDBox mb={1.5}>
-                <ComplexStatisticsCard
-                    icon="leaderboard"
-                    title="Today's Users"
-                    count="2,300"
-                    percentage={{
-                      color: "success",
-                      amount: "+3%",
-                      label: "than last month",
-                    }}
-                />
-              </MDBox>
-            </Grid>
-            <Grid item xs={12} md={6} lg={3}>
-              <MDBox mb={1.5}>
-                <ComplexStatisticsCard
                     color="success"
-                    icon="store"
-                    title="Revenue"
+                    icon="home"
+                    title="Solar Farm"
                     count="34k"
                     percentage={{
                       color: "success",
@@ -90,9 +64,38 @@ function Dashboard() {
             <Grid item xs={12} md={6} lg={3}>
               <MDBox mb={1.5}>
                 <ComplexStatisticsCard
+                    color="dark"
+                    icon="bolt"
+                    title="Measurement Devices"
+                    count={measurementDevicesNum}
+                    percentage={{
+                      color: "success",
+                      amount: measurementActiveDevicesNum,
+                      label: "active devices",
+                    }}
+                />
+              </MDBox>
+            </Grid>
+            <Grid item xs={12} md={6} lg={3}>
+              <MDBox mb={1.5}>
+                <ComplexStatisticsCard
+                    icon="lightbulb"
+                    title="Consumption Devices"
+                    count="2,300"
+                    percentage={{
+                      color: "success",
+                      amount: "+3%",
+                      label: "than last month",
+                    }}
+                />
+              </MDBox>
+            </Grid>
+            <Grid item xs={12} md={6} lg={3}>
+              <MDBox mb={1.5}>
+                <ComplexStatisticsCard
                     color="primary"
                     icon="person_add"
-                    title="Followers"
+                    title="Users"
                     count="+91"
                     percentage={{
                       color: "success",

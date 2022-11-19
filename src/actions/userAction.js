@@ -1,7 +1,6 @@
 import {SET_EMAIL, SET_NAME, SET_USERID} from "./types";
 import {singInFirebase, singUpFirebase} from "../auth";
 import {setSingInError} from "./singInScreenAction";
-import {useNavigate} from "react-router-dom";
 import {setSingUpError} from "./singUpScreenAction";
 
 export function setUserId(userId) {
@@ -25,9 +24,8 @@ export function setName(name) {
   }
 }
 
-export function singIn(email, password) {
+export function singIn(email, password, navigate) {
   return async (dispatch) => {
-    let navigate = useNavigate()
     singInFirebase(email, password).then(
         (userCredential) => {
           const {user} = userCredential;
@@ -52,7 +50,7 @@ export function singUp(email, password, name, navigate) {
       dispatch(setUserId(user.uid));
       dispatch(setName(name));
       dispatch(setEmail(email));
-      navigate()
+      navigate("/dashboard")
     })
     .catch((error) => {
       const errorCode = error.code;

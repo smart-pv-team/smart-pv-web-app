@@ -11,8 +11,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    singIn: (email, password) => {
-      dispatch(singIn(email, password));
+    singIn: (email, password, navigate) => {
+      dispatch(singIn(email, password, navigate));
     }
   }
 }

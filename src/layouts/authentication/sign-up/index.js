@@ -14,7 +14,7 @@
  */
 
 // react-router-dom components
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -40,7 +40,7 @@ function Cover({singUpError, singUp}) {
     email: yup.string().email().required(),
     password: yup.string().min(6).max(32).required(),
   });
-
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -50,7 +50,7 @@ function Cover({singUpError, singUp}) {
   });
 
   const onSubmitHandler = (data) => {
-    singUp(data.email, data.password, data.name);
+    singUp(data.email, data.password, data.name, navigate);
   };
 
   return (

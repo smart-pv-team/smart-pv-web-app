@@ -11,8 +11,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    singUp: (email, password, name) => {
-      dispatch(singUp(email, password, name));
+    singUp: (email, password, name, navigate) => {
+      dispatch(singUp(email, password, name, navigate));
     }
   }
 }
