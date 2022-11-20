@@ -36,7 +36,6 @@ export default function CustomSelector({
                       <Select
                           label={label}
                           value={value}
-                          defaultValue="PUT"
                           open={open}
                           onClose={onClose}
                           onOpen={onOpen}

@@ -77,6 +77,14 @@ const routes = [
   },
   {
     type: "collapse",
+    name: "Edit Measurement Device",
+    key: "edit-measurement-device",
+    icon: <Icon fontSize="small">bolt</Icon>,
+    route: "/add-measurement-device/:id",
+    component: <AddMeasurementDevice/>,
+  },
+  {
+    type: "collapse",
     name: "Tables",
     key: "tables",
     icon: <Icon fontSize="small">table_view</Icon>,

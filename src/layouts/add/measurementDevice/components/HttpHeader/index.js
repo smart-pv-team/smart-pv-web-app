@@ -27,12 +27,11 @@ import MDButton from "components/MDButton";
 // Material Dashboard 2 React context
 import {useMaterialUIController} from "context";
 
-function HttpHeader({header, value, httpHeaders, setHttpHeaders, key}) {
+function HttpHeader({header, value, remove, key}) {
   const [controller] = useMaterialUIController();
   const {darkMode} = controller;
-
   const handleDelete = () => {
-    setHttpHeaders(Object.fromEntries(Object.entries(httpHeaders).filter(([key, _]) => key !== header)))
+    remove()
   }
   return (
       <MDBox
@@ -53,10 +52,10 @@ function HttpHeader({header, value, httpHeaders, setHttpHeaders, key}) {
               alignItems={{xs: "flex-start", sm: "center"}}
               flexDirection={{xs: "column", sm: "row"}}
           >
-            <MDTypography variant="button" fontWeight="medium">
+            <MDTypography pr={2} variant="button" fontWeight="medium">
               {header}
             </MDTypography>
-            <MDTypography variant="button" fontWeight="medium">
+            <MDTypography sx={{wordBreak: "break-word"}} variant="button" fontWeight="medium">
               {value}
             </MDTypography>
             <MDBox display="flex" alignItems="center" mt={{xs: 2, sm: 0}} ml={{xs: -1.5, sm: 0}}>

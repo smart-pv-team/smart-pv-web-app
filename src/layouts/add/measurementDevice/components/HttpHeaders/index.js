@@ -24,7 +24,7 @@ import MDTypography from "components/MDTypography";
 import HttpHeader from "../HttpHeader";
 import React from "react";
 
-function HttpHeaders({httpHeaders, setHttpHeaders}) {
+function HttpHeaders({remove, httpHeaders}) {
   return (
       <Card id="delete-account">
         <MDBox pl={1} pt={3} px={2}>
@@ -34,13 +34,13 @@ function HttpHeaders({httpHeaders, setHttpHeaders}) {
         </MDBox>
         <MDBox pt={1} pb={2} px={2}>
           <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
-            {Object.entries(httpHeaders).map((header, key) => {
+            {Object.entries(httpHeaders).map(([idx, httpHeader]) => {
               return (<HttpHeader
-                  key={key}
-                  httpHeaders={httpHeaders}
-                  setHttpHeaders={setHttpHeaders}
-                  header={header[0]}
-                  value={header[1]}
+                  key={httpHeader.id}
+                  httpHeader={httpHeader}
+                  remove={() => remove(idx)}
+                  header={httpHeader.header}
+                  value={httpHeader.value}
               />)
             })}
           </MDBox>

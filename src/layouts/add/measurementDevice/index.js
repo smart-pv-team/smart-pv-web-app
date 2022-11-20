@@ -34,33 +34,50 @@ import MDTypography from "../../../components/MDTypography";
 import Card from "@mui/material/Card";
 import {Button} from "@mui/material";
 import * as yup from "yup";
-import {useForm} from "react-hook-form";
+import {useFieldArray, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
 import React, {useState} from "react";
 import pattern from "assets/images/illustrations/supla_mew_01.jpeg";
 import CustomSelector from "../../../components/MDSelector";
+import {useParams} from "react-router-dom";
 
-function AddMeasurementDevice({addNewDevice, farmsIds, deviceModels, edit, values}) {
+function AddMeasurementDevice({addNewDevice, farmsIds, deviceModels, devices}) {
   const schema = yup.object().shape({
     name: yup.string().required(),
     farm: yup.string().required(),
     ipAddress: yup.string().required(),
     deviceModel: yup.string().required(),
-    headers: yup.array(),
+    headers: yup.array().of(
+        yup.object().shape({
+          header: yup.string(),
+          value: yup.string()
+        })
+    ),
     endpoint: yup.string().required(),
     httpMethod: yup.string().oneOf(["PATCH", "PUT", "GET", "POST"]).required(),
-    description: yup.string().required()
+    description: yup.string()
   });
-  const [open, setOpen] = useState(false);
-  const [httpHeaders, setHttpHeaders] = useState([])
+  const {id} = useParams();
 
+  const [open, setOpen] = useState(false);
   const handleClose = () => {
     setOpen(false);
   };
-
   const handleOpen = () => {
     setOpen(true);
   };
+  const device = id ? devices.filter((ob) => ob.id === id)[0] : undefined
+  const defaultValues = device ? {
+    name: device.name,
+    farm: device.farmId,
+    ipAddress: device.ipAddress,
+    deviceModel: device.deviceModel,
+    headers: Object.entries(device.endpoints.filter((e) => e.action === "READ").map((e) => e.httpHeaders)[0]).map(
+        (e) => ({header: e[0], value: e[1][0]})),
+    endpoint: device.endpoints.filter((e) => e.action === "READ")[0].endpoint,
+    httpMethod: device.endpoints.filter((e) => e.action === "READ")[0].httpMethod,
+  } : {}
+
   const {
     register,
     handleSubmit,
@@ -68,13 +85,10 @@ function AddMeasurementDevice({addNewDevice, farmsIds, deviceModels, edit, value
     formState: {errors},
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: defaultValues,
   });
-
+  const {fields, append, remove} = useFieldArray({name: 'headers', control});
   const onSubmitHandler = (data) => {
-    data = {
-      ...data,
-      headers: httpHeaders
-    }
     console.log(data)
     addNewDevice(data);
   };
@@ -176,10 +190,10 @@ function AddMeasurementDevice({addNewDevice, farmsIds, deviceModels, edit, value
           <MDBox mb={3}>
             <Grid container spacing={3}>
               <Grid item xs={12} md={7}>
-                <HttpHeaders setHttpHeaders={setHttpHeaders} httpHeaders={httpHeaders} fullWidth required/>
+                <HttpHeaders remove={remove} httpHeaders={fields} fullWidth required/>
               </Grid>
               <Grid item xs={12} md={5}>
-                <AddHttpHeader setHttpHeaders={setHttpHeaders} httpHeaders={httpHeaders} fullWidth register={register}
+                <AddHttpHeader append={append} httpHeaders={fields} fullWidth register={register}
                                required/>
               </Grid>
             </Grid>

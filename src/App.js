@@ -152,7 +152,8 @@ export default function App() {
                   color={sidenavColor}
                   brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
                   brandName="SmartPV"
-                  routes={routes.filter((route) => route.key !== "add-measurement-device")}
+                  routes={routes.filter(
+                      (route) => !["add-measurement-device", "edit-measurement-device"].includes(route.key))}
                   onMouseEnter={handleOnMouseEnter}
                   onMouseLeave={handleOnMouseLeave}
               />

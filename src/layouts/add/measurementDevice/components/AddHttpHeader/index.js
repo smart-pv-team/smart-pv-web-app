@@ -28,7 +28,7 @@ import Grid from "@mui/material/Grid";
 import MDInput from "../../../../../components/MDInput";
 import {useState} from "react";
 
-function AddHttpHeader({setHttpHeaders, httpHeaders}) {
+function AddHttpHeader({append, httpHeaders}) {
   const [header, setHeader] = useState("")
   const [value, setValue] = useState("")
   const handleHeaderChange = (e) => {
@@ -40,10 +40,12 @@ function AddHttpHeader({setHttpHeaders, httpHeaders}) {
     setValue(data)
   }
   const handleAddNewHeader = () => {
-    setHttpHeaders({
-      ...httpHeaders,
-      [header]: value
-    })
+    if (!httpHeaders.filter((ob) => ob.header === header).length) {
+      append({
+        header: header,
+        value: value
+      })
+    }
   }
   return (
       <Card sx={{height: "100%"}}>

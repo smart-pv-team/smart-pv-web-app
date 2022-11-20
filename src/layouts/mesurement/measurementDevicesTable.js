@@ -22,6 +22,7 @@ import MDBadge from "components/MDBadge";
 
 // Images
 import Icon from "@mui/material/Icon";
+import {Link} from "react-router-dom";
 
 export default function MeasurementDevicesTable(devices) {
   const Device = ({name, deviceModel}) => (
@@ -70,7 +71,9 @@ export default function MeasurementDevicesTable(devices) {
                 </MDTypography>
             ),
             action: (
-                <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+                <MDTypography component={Link}
+                              to={"/add-measurement-device/:id".replace(':id', device.id)}
+                              variant="caption" color="text" fontWeight="medium">
                   Edit
                 </MDTypography>
             ),
