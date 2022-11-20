@@ -40,7 +40,7 @@ import React, {useState} from "react";
 import pattern from "assets/images/illustrations/supla_mew_01.jpeg";
 import CustomSelector from "../../../components/MDSelector";
 
-function AddMeasurementDevice({addNewDevice}) {
+function AddMeasurementDevice({addNewDevice, farmsIds, deviceModels, edit, values}) {
   const schema = yup.object().shape({
     name: yup.string().required(),
     farm: yup.string().required(),
@@ -51,7 +51,6 @@ function AddMeasurementDevice({addNewDevice}) {
     httpMethod: yup.string().oneOf(["PATCH", "PUT", "GET", "POST"]).required(),
     description: yup.string().required()
   });
-
   const [open, setOpen] = useState(false);
   const [httpHeaders, setHttpHeaders] = useState([])
 
@@ -131,7 +130,7 @@ function AddMeasurementDevice({addNewDevice}) {
                           Select Device Model
                         </MDTypography>
                         <CustomSelector gridProps={{pl: "25px"}} control={control} errors={errors}
-                                        id="deviceModel" label="" options={[1, 2, 3]}
+                                        id="deviceModel" label="" options={deviceModels}
                                         open={open} onOpen={handleOpen} onClose={handleClose}
                         />
                       </MDBox>
@@ -165,7 +164,7 @@ function AddMeasurementDevice({addNewDevice}) {
                     </Card>
                   </Grid>
                   <Grid item xs={12}>
-                    <DeviceInfo control={control} register={register} errors={errors}/>
+                    <DeviceInfo farmsIds={farmsIds} control={control} register={register} errors={errors}/>
                   </Grid>
                 </Grid>
               </Grid>

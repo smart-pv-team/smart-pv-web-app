@@ -28,7 +28,7 @@ import MDInput from "components/MDInput";
 import CustomSelector from "../../../../../components/MDSelector";
 import React from "react";
 
-function DeviceInfo({register, errors, control}) {
+function DeviceInfo({register, errors, control, farmsIds}) {
   return (
       <Card id="delete-account">
         <MDBox pt={2} px={2} display="flex" justifyContent="space-between" alignItems="center">
@@ -56,7 +56,7 @@ function DeviceInfo({register, errors, control}) {
             <Grid item xs={12} md={6}>
               <CustomSelector control={control} errors={errors}
                               icon={<Icon sx={{color: 'action.active'}}>home</Icon>}
-                              id="farm" label="Farm" options={[1, 2, 3]}/>
+                              id="farm" label="Farm" options={farmsIds}/>
             </Grid>
             <Grid item xs={12} md={6}>
               <MDBox

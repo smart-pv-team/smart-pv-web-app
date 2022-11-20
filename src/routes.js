@@ -44,7 +44,7 @@ import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
 import SignIn from "containers/singInContainer";
 import SignUp from "containers/singUpContainer";
-import Measurement from "./layouts/mesurement";
+import Measurement from "./containers/measurementContainer";
 import AddMeasurementDevice from "./containers/addMeasurementDeviceContainer";
 
 // @mui icons

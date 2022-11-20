@@ -28,13 +28,13 @@ import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
-import authorsTableData from "layouts/tables/data/authorsTableData";
 import MDButton from "../../components/MDButton";
 import Icon from "@mui/material/Icon";
-import MuiLink from "@mui/material/Link";
+import measurementDevicesTable from "./measurementDevicesTable"
+import {Link} from "react-router-dom";
 
-function Measurement() {
-  const {columns, rows} = authorsTableData();
+function Measurement({devices}) {
+  const {columns, rows} = measurementDevicesTable(devices);
 
   return (
       <DashboardLayout>
@@ -59,7 +59,8 @@ function Measurement() {
                       Measurement Devices
                     </MDTypography>
 
-                    <MDTypography component={MuiLink} href="/add-measurement-device" variant="body1" color="white">
+                    <MDTypography component={Link}
+                                  to="/add-measurement-device" variant="body1" color="white">
                       <MDButton variant="gradient" color="white">
                         <Icon sx={{fontWeight: "bold"}}>add</Icon>
                         &nbsp;add new device

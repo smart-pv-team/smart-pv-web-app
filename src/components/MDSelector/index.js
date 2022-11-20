@@ -36,6 +36,7 @@ export default function CustomSelector({
                       <Select
                           label={label}
                           value={value}
+                          defaultValue="PUT"
                           open={open}
                           onClose={onClose}
                           onOpen={onOpen}
@@ -45,9 +46,11 @@ export default function CustomSelector({
                             onChange(e.target.value)
                           }}
                       >
-                        {options.map((option) => (
-                            <MenuItem value={option}>{option}</MenuItem>
-                        ))}
+                        {options.map((option) => {
+                          return (
+                              <MenuItem value={option}>{option}</MenuItem>
+                          )
+                        })}
                       </Select>
                   )}
               />

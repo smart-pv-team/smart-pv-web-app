@@ -2,6 +2,7 @@ import {SET_EMAIL, SET_NAME, SET_USERID} from "./types";
 import {singInFirebase, singUpFirebase} from "../auth";
 import {setSingInError} from "./singInScreenAction";
 import {setSingUpError} from "./singUpScreenAction";
+import {init} from "./appInfoAction";
 
 export function setUserId(userId) {
   return {
@@ -31,6 +32,7 @@ export function singIn(email, password, navigate) {
           const {user} = userCredential;
           dispatch(setUserId(user.uid));
           dispatch(setEmail(email));
+          dispatch(init(user.uid));
           navigate("/dashboard")
         }
     ).catch((error) => {
@@ -50,7 +52,7 @@ export function singUp(email, password, name, navigate) {
       dispatch(setUserId(user.uid));
       dispatch(setName(name));
       dispatch(setEmail(email));
-      navigate("/dashboard")
+      navigate("/singIn")
     })
     .catch((error) => {
       const errorCode = error.code;

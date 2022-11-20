@@ -1,8 +1,9 @@
-import {SET_SCREEN} from "./types";
+import {fetchMeasuringDevices} from "./measurementAction";
+import {fetchFarms} from "./farmAction";
 
-export function setScreen(screen) {
-  return {
-    type: SET_SCREEN,
-    screen: screen
+export function init(userId) {
+  return async (dispatch) => {
+    dispatch(fetchMeasuringDevices());
+    dispatch(fetchFarms());
   }
 }

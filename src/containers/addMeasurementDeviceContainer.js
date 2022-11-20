@@ -2,7 +2,12 @@ import {connect} from 'react-redux';
 import AddMeasurementDevice from "../layouts/add/measurementDevice";
 
 function mapStateToProps(state, ownProps) {
-  return {};
+  const deviceModels = state.farm.deviceModels
+  const farmsIds = state.farm.farms.map((farm) => farm.id)
+  return {
+    deviceModels,
+    farmsIds
+  };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
