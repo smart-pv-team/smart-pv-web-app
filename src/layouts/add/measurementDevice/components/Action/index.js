@@ -27,7 +27,7 @@ import MDInput from "../../../../../components/MDInput";
 import React from "react";
 import CustomSelector from "../../../../../components/MDSelector";
 
-function Action({register, errors, control}) {
+function Action({register, errors, control, responseOptions}) {
   return (
       <Card sx={{height: "100%"}}>
         <MDBox pt={2} px={2} display="flex" justifyContent="space-between" alignItems="center">
@@ -56,6 +56,11 @@ function Action({register, errors, control}) {
               <CustomSelector control={control} errors={errors}
                               icon={<Icon sx={{color: 'action.active', my: 0.5}}>http</Icon>}
                               id="httpMethod" label="Select Http Method" options={["PATCH", "PUT", "GET", "POST"]}/>
+            </Grid>
+            <Grid item xs={24} md={24}>
+              <CustomSelector control={control} errors={errors}
+                              icon={<Icon sx={{color: 'action.active', my: 0.5}}>http</Icon>}
+                              id="responseClass" label="Select Response Class" options={responseOptions}/>
             </Grid>
             <Grid item xs={24} md={24}>
               <MDBox

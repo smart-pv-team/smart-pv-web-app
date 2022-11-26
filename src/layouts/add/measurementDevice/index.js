@@ -41,10 +41,11 @@ import pattern from "assets/images/illustrations/supla_mew_01.jpeg";
 import CustomSelector from "../../../components/MDSelector";
 import {useParams} from "react-router-dom";
 
-function AddMeasurementDevice({addNewDevice, farmsIds, deviceModels, devices}) {
+function AddMeasurementDevice({addNewDevice, farmsIds, deviceModels, devices, responseOptions}) {
   const schema = yup.object().shape({
+    id: yup.string(),
     name: yup.string().required(),
-    farm: yup.string().required(),
+    farmId: yup.string().required(),
     ipAddress: yup.string().required(),
     deviceModel: yup.string().required(),
     headers: yup.array().of(
@@ -55,7 +56,8 @@ function AddMeasurementDevice({addNewDevice, farmsIds, deviceModels, devices}) {
     ),
     endpoint: yup.string().required(),
     httpMethod: yup.string().oneOf(["PATCH", "PUT", "GET", "POST"]).required(),
-    description: yup.string()
+    description: yup.string(),
+    responseClass: yup.string().required()
   });
   const {id} = useParams();
 
@@ -68,14 +70,16 @@ function AddMeasurementDevice({addNewDevice, farmsIds, deviceModels, devices}) {
   };
   const device = id ? devices.filter((ob) => ob.id === id)[0] : undefined
   const defaultValues = device ? {
+    id: id,
     name: device.name,
-    farm: device.farmId,
+    farmId: device.farmId,
     ipAddress: device.ipAddress,
     deviceModel: device.deviceModel,
     headers: Object.entries(device.endpoints.filter((e) => e.action === "READ").map((e) => e.httpHeaders)[0]).map(
         (e) => ({header: e[0], value: e[1][0]})),
     endpoint: device.endpoints.filter((e) => e.action === "READ")[0].endpoint,
     httpMethod: device.endpoints.filter((e) => e.action === "READ")[0].httpMethod,
+    responseClass: device.endpoints.filter((e) => e.action === "READ")[0].responseClass,
   } : {}
 
   const {
@@ -183,7 +187,7 @@ function AddMeasurementDevice({addNewDevice, farmsIds, deviceModels, devices}) {
                 </Grid>
               </Grid>
               <Grid item xs={12} lg={4}>
-                <Action errors={errors} control={control} register={register}/>
+                <Action errors={errors} control={control} register={register} responseOptions={responseOptions}/>
               </Grid>
             </Grid>
           </MDBox>

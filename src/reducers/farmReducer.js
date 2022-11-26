@@ -1,7 +1,8 @@
-import {SET_DEVICE_MODELS, SET_FARMS} from "../actions/types";
+import {SET_DEVICE_MODELS, SET_FARMS, SET_RESPONSE_OPTIONS} from "../actions/types";
 
 const initialState = {
   deviceModels: [],
+  responseOptions: [],
   farms: [],
 };
 
@@ -11,6 +12,12 @@ export default function farmReducer(state = initialState, action) {
       return {
         ...state,
         deviceModels: action.deviceModels,
+      };
+    }
+    case SET_RESPONSE_OPTIONS: {
+      return {
+        ...state,
+        responseOptions: action.responseOptions,
       };
     }
     case SET_FARMS: {

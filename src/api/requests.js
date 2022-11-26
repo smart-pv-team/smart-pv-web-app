@@ -1,6 +1,6 @@
 import {ConnectivityError, RequestError} from "../errors/common";
 
-const TIMEOUT_MS = 30000;
+const TIMEOUT_MS = 100000;
 
 export function get(
     address,
@@ -97,6 +97,7 @@ const _del = (address, {headers = {}, params = {}, timeout} = {}) =>
     )
 
 const timeoutFetch = (url, options, timeout) => {
+  console.log(url, options)
   // 0 means no timeout
   if (!timeout) {
     return fetch(url, options);

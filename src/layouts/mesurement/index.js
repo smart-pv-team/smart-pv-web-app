@@ -33,8 +33,8 @@ import Icon from "@mui/material/Icon";
 import measurementDevicesTable from "./measurementDevicesTable"
 import {Link} from "react-router-dom";
 
-function Measurement({devices}) {
-  const {columns, rows} = measurementDevicesTable(devices);
+function Measurement({devices, deleteMeasuringDevice}) {
+  const {columns, rows} = measurementDevicesTable(devices, deleteMeasuringDevice);
 
   return (
       <DashboardLayout>

@@ -23,8 +23,9 @@ import MDBadge from "components/MDBadge";
 // Images
 import Icon from "@mui/material/Icon";
 import {Link} from "react-router-dom";
+import MDButton from "../../components/MDButton";
 
-export default function MeasurementDevicesTable(devices) {
+export default function MeasurementDevicesTable(devices, deleteMeasuringDevice) {
   const Device = ({name, deviceModel}) => (
       <MDBox display="flex" alignItems="center" lineHeight={1}>
         <Icon fontSize="small">bolt</Icon>
@@ -44,6 +45,7 @@ export default function MeasurementDevicesTable(devices) {
       {Header: "added", accessor: "added", align: "center"},
       {Header: "ip address", accessor: "ipAddress", align: "center"},
       {Header: "action", accessor: "action", align: "center"},
+      {Header: "delete", accessor: "delete", align: "center"},
     ],
 
     rows: devices.map((device) => {
@@ -76,6 +78,13 @@ export default function MeasurementDevicesTable(devices) {
                               variant="caption" color="text" fontWeight="medium">
                   Edit
                 </MDTypography>
+            ),
+            delete: (
+                <MDBox ml={-1}>
+                  <MDButton variant="text" color="error" onClick={() => deleteMeasuringDevice(device.id)}>
+                    <Icon>delete</Icon>
+                  </MDButton>
+                </MDBox>
             ),
           })
     }),

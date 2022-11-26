@@ -56,7 +56,7 @@ function DeviceInfo({register, errors, control, farmsIds}) {
             <Grid item xs={12} md={6}>
               <CustomSelector control={control} errors={errors}
                               icon={<Icon sx={{color: 'action.active'}}>home</Icon>}
-                              id="farm" label="Farm" options={farmsIds}/>
+                              id="farmId" label="FarmId" options={farmsIds}/>
             </Grid>
             <Grid item xs={12} md={6}>
               <MDBox

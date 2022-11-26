@@ -1,30 +1,22 @@
-import {SET_EMAIL, SET_NAME, SET_USERID} from "../actions/types";
+import {SET_USER} from "../actions/types";
 
 const initialState = {
   userId: "",
   email: "",
-  name: ""
+  name: "",
+  farmId: ""
 };
 
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
-    case SET_USERID: {
+    case SET_USER: {
       return {
         ...state,
         userId: action.userId,
-      };
-    }
-    case SET_EMAIL: {
-      return {
-        ...state,
         email: action.email,
+        name: action.name,
+        farmId: action.farmId
       };
-    }
-    case SET_NAME: {
-      return {
-        ...state,
-        name: action.name
-      }
     }
     default:
       return state;

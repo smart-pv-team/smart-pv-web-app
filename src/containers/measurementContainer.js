@@ -1,5 +1,6 @@
 import {connect} from 'react-redux';
 import Measurement from "../layouts/mesurement";
+import {deleteMeasuringDevice} from "../actions/measurementAction";
 
 function mapStateToProps(state, ownProps) {
   const devices = state.measurement.devices
@@ -9,7 +10,9 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
-  return {}
+  return {
+    deleteMeasuringDevice: (id) => dispatch(deleteMeasuringDevice(id))
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Measurement);

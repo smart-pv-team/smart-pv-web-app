@@ -1,9 +1,15 @@
-import {fetchMeasuringDevices} from "./measurementAction";
+import {fetchUser} from "./userAction";
 import {fetchFarms} from "./farmAction";
+import {fetchMeasuringDevices} from "./measurementAction";
 
 export function init(userId) {
   return async (dispatch) => {
-    dispatch(fetchMeasuringDevices());
-    dispatch(fetchFarms());
+    try {
+      dispatch(fetchUser(userId))
+      dispatch(fetchFarms())
+      dispatch(fetchMeasuringDevices())
+    } catch (e) {
+      console.log(e)
+    }
   }
 }

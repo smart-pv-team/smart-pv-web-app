@@ -30,6 +30,7 @@
     "chart.js": "3.4.1",
     "chroma-js": "2.4.2",
     "firebase": "^9.14.0",
+    "http-status-codes": "^2.2.0",
     "prop-types": "15.8.1",
     "qs": "^6.11.0",
     "react": "17.0.2",

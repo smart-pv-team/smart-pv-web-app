@@ -96,7 +96,7 @@ function Cover({singUpError, singUp}) {
                     color="error"
                     textGradient
                 >
-                  {singUpError || errors["email"]?.message || errors["password"]?.message || errors["name"]?.message}
+                  {errors["email"]?.message || errors["password"]?.message || errors["name"]?.message || singUpError}
                 </MDTypography>
               </MDBox>
               <MDBox mt={4} mb={1}>
