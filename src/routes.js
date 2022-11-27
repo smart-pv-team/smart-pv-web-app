@@ -45,6 +45,8 @@ import Profile from "layouts/profile";
 import SignIn from "containers/singInContainer";
 import SignUp from "containers/singUpContainer";
 import Measurement from "./containers/measurementContainer";
+import Users from "./containers/usersContainer";
+import AddUsers from "./containers/addUserContainer";
 import AddMeasurementDevice from "./containers/addMeasurementDeviceContainer";
 
 // @mui icons
@@ -66,6 +68,22 @@ const routes = [
     icon: <Icon fontSize="small">bolt</Icon>,
     route: "/measurement",
     component: <Measurement/>,
+  },
+  {
+    type: "collapse",
+    name: "Users",
+    key: "users",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "/users",
+    component: <Users/>,
+  },
+  {
+    type: "collapse",
+    name: "Add User",
+    key: "add-user",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "/add-user",
+    component: <AddUsers/>,
   },
   {
     type: "collapse",

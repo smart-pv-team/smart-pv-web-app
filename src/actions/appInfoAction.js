@@ -1,11 +1,12 @@
-import {fetchUser} from "./userAction";
+import {fetchAdmin, fetchUsers} from "./roleAction";
 import {fetchFarms} from "./farmAction";
 import {fetchMeasuringDevices} from "./measurementAction";
 
-export function init(userId) {
+export function init(adminId) {
   return async (dispatch) => {
     try {
-      dispatch(fetchUser(userId))
+      dispatch(fetchAdmin(adminId))
+      dispatch(fetchUsers(adminId))
       dispatch(fetchFarms())
       dispatch(fetchMeasuringDevices())
     } catch (e) {

@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {singUp} from "../actions/userAction";
+import {singUp} from "../actions/roleAction";
 import Cover from "../layouts/authentication/sign-up";
 
 function mapStateToProps(state) {

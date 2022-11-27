@@ -1,5 +1,5 @@
 import Basic from "../layouts/authentication/sign-in";
-import {singIn} from "../actions/userAction";
+import {singIn} from "../actions/roleAction";
 import {connect} from 'react-redux';
 
 function mapStateToProps(state) {

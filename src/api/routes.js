@@ -5,14 +5,17 @@ export const ip = "http://localhost:8080";
 export const measurementDevicesAddress = ip + "/measurement/devices";
 export const measurementDeviceAddress = (deviceId) => ip + "/measurement/devices" + `/${deviceId}`;
 
-// farm
+// management
 
 export const farmIdsAddress = ip + "/management/farms";
 export const farmAddress = (farmId) => ip + "/management/farms" + `/${farmId}`;
 export const devicesModelAddress = ip + "/management/devicesModel";
 export const responseOptionsAddress = ip + "/management/responseOptions";
 
-//user
+// role
 
-export const userByTokenAddress = (token) => ip + "/api/user/token" + `/${token}`;
 export const userAddress = ip + "/api/user"
+export const adminAddress = ip + "/api/admin"
+export const userByTokenAddress = (token) => ip + "/api/user/token" + `/${token}`;
+export const adminByTokenAddress = (token) => ip + "/api/admin/token" + `/${token}`;
+export const adminUsersAddress = (token) => ip + "/api/admin/token" + `/${token}` + "/pupils";

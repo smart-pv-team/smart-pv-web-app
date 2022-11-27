@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import userReducer from './userReducer'
+import roleReducer from './roleReducer'
 import singInScreenReducer from "./singInScreenReducer";
 import appInfoReducer from "./appInfoReducer";
 import singUpScreenReducer from "./singUpScreenReducer";
@@ -11,7 +11,7 @@ const rootReducer = (state, action) => {
     state = undefined;
   }
   const reducers = combineReducers({
-    user: userReducer,
+    user: roleReducer,
     singInScreen: singInScreenReducer,
     singUpScreen: singUpScreenReducer,
     appInfo: appInfoReducer,
