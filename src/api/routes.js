@@ -5,6 +5,11 @@ export const ip = "http://localhost:8080";
 export const measurementDevicesAddress = ip + "/measurement/devices";
 export const measurementDeviceAddress = (deviceId) => ip + "/measurement/devices" + `/${deviceId}`;
 
+// consumption
+
+export const consumptionDevicesAddress = ip + "/consumption/devices";
+export const consumptionDeviceAddress = (deviceId) => ip + "/consumption/devices" + `/${deviceId}`;
+
 // management
 
 export const farmIdsAddress = ip + "/management/farms";

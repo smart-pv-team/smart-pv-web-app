@@ -5,7 +5,8 @@ const initialState = {
   email: "",
   name: "",
   farmId: "",
-  users: ""
+  users: [],
+  usersNum: 0,
 };
 
 export default function roleReducer(state = initialState, action) {
@@ -23,6 +24,7 @@ export default function roleReducer(state = initialState, action) {
       return {
         ...state,
         users: action.users,
+        usersNum: action.users.length
       };
     }
     default:

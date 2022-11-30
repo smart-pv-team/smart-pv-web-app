@@ -5,6 +5,7 @@ import appInfoReducer from "./appInfoReducer";
 import singUpScreenReducer from "./singUpScreenReducer";
 import measurementReducer from "./measurementReducer";
 import farmReducer from "./farmReducer";
+import consumptionReducer from "./consumptionReducer";
 
 const rootReducer = (state, action) => {
   if (action.type === "RESET_STATE") {
@@ -16,6 +17,7 @@ const rootReducer = (state, action) => {
     singUpScreen: singUpScreenReducer,
     appInfo: appInfoReducer,
     measurement: measurementReducer,
+    consumption: consumptionReducer,
     farm: farmReducer,
   })
   return reducers(state, action);

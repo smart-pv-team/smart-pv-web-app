@@ -27,7 +27,7 @@ import MDButton from "components/MDButton";
 
 // Authentication layout components
 // Images
-import bgImage from "assets/images/bg-sign-up-cover.jpeg";
+import bgImage from "assets/images/pv_1.jpeg";
 import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup/dist/yup";

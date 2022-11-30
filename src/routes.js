@@ -37,17 +37,18 @@
 
 // Material Dashboard 2 React layouts
 import Dashboard from "containers/dashboardContainer";
-import Tables from "layouts/tables";
-import Billing from "layouts/billing";
-import RTL from "layouts/rtl";
-import Notifications from "layouts/notifications";
-import Profile from "layouts/profile";
 import SignIn from "containers/singInContainer";
 import SignUp from "containers/singUpContainer";
 import Measurement from "./containers/measurementContainer";
 import Users from "./containers/usersContainer";
 import AddUsers from "./containers/addUserContainer";
 import AddMeasurementDevice from "./containers/addMeasurementDeviceContainer";
+import Algorithm from "./containers/algorithmContainer";
+import PriorityAlgorithm from "./containers/algorithms/priorityAlgorithmContainer";
+import TimePriorityAlgorithm from "./containers/algorithms/timePriorityAlgorithmContainer";
+import RandomPriorityAlgorithm from "./containers/algorithms/randomAlgorithmContainer";
+import IntervalAlgorithmContainer from "./containers/algorithms/intervalAlgorithmContainer";
+import FarmContainer from "./containers/farmContainer";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -103,47 +104,80 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Tables",
-    key: "tables",
-    icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/tables",
-    component: <Tables/>,
+    name: "Algorithm",
+    key: "algorithm",
+    icon: <Icon fontSize="small">motion_photos_auto</Icon>,
+    route: "/algorithm",
+    component: <Algorithm/>,
   },
   {
     type: "collapse",
-    name: "Billing",
-    key: "billing",
-    icon: <Icon fontSize="small">receipt_long</Icon>,
-    route: "/billing",
-    component: <Billing/>,
+    name: "Algorithm Priority",
+    key: "algorithm-priority",
+    icon: <Icon fontSize="small">motion_photos_auto</Icon>,
+    route: "/algorithm/priority",
+    component: <PriorityAlgorithm/>,
   },
   {
     type: "collapse",
-    name: "RTL",
-    key: "rtl",
-    icon: <Icon fontSize="small">format_textdirection_r_to_l</Icon>,
-    route: "/rtl",
-    component: <RTL/>,
+    name: "Algorithm Time Priority",
+    key: "algorithm-time-priority",
+    icon: <Icon fontSize="small">motion_photos_auto</Icon>,
+    route: "/algorithm/time-priority",
+    component: <TimePriorityAlgorithm/>,
   },
   {
     type: "collapse",
-    name: "Notifications",
-    key: "notifications",
-    icon: <Icon fontSize="small">notifications</Icon>,
-    route: "/notifications",
-    component: <Notifications/>,
+    name: "Algorithm Random",
+    key: "algorithm-random",
+    icon: <Icon fontSize="small">motion_photos_auto</Icon>,
+    route: "/algorithm/random",
+    component: <RandomPriorityAlgorithm/>,
   },
   {
     type: "collapse",
-    name: "Profile",
-    key: "profile",
-    icon: <Icon fontSize="small">person</Icon>,
-    route: "/profile",
-    component: <Profile/>,
+    name: "Algorithm Interval",
+    key: "algorithm-interval",
+    icon: <Icon fontSize="small">motion_photos_auto</Icon>,
+    route: "/algorithm/interval",
+    component: <IntervalAlgorithmContainer/>,
   },
   {
     type: "collapse",
-    name: "Sign In",
+    name: "Farm",
+    key: "farm",
+    icon: <Icon fontSize="small">home</Icon>,
+    route: "/farm",
+    component: <FarmContainer/>,
+  },
+  {
+    type: "collapse",
+    name: "Consumption",
+    key: "consumption",
+    icon: <Icon fontSize="small">microwave_icon</Icon>,
+    route: "/consumption",
+    component: <div/>,
+  },
+
+  /*  {
+      type: "collapse",
+      name: "Notifications",
+      key: "notifications",
+      icon: <Icon fontSize="small">notifications</Icon>,
+      route: "/notifications",
+      component: <Notifications/>,
+    },*/
+  {
+    type: "collapse",
+    name: "About Us",
+    key: "about-us",
+    icon: <Icon fontSize="small">supervised_user_circle_icon</Icon>,
+    route: "/about-us",
+    component: <div/>,
+  },
+  {
+    type: "collapse",
+    name: "Sign Out",
     key: "sign-in",
     icon: <Icon fontSize="small">login</Icon>,
     route: "/authentication/sign-in",
