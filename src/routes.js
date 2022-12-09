@@ -52,6 +52,7 @@ import FarmContainer from "./containers/farmContainer";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
+import AboutUs from "./containers/aboutUsContainer";
 
 const routes = [
   {
@@ -173,7 +174,7 @@ const routes = [
     key: "about-us",
     icon: <Icon fontSize="small">supervised_user_circle_icon</Icon>,
     route: "/about-us",
-    component: <div/>,
+    component: <AboutUs/>,
   },
   {
     type: "collapse",
