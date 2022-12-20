@@ -53,6 +53,8 @@ import FarmContainer from "./containers/farmContainer";
 // @mui icons
 import Icon from "@mui/material/Icon";
 import AboutUs from "./containers/aboutUsContainer";
+import Consumption from "./containers/consumptionContainer";
+import AddConsumptionDevice from "./containers/addConsumptionDeviceContainer";
 
 const routes = [
   {
@@ -102,6 +104,22 @@ const routes = [
     icon: <Icon fontSize="small">bolt</Icon>,
     route: "/add-measurement-device/:id",
     component: <AddMeasurementDevice/>,
+  },
+  {
+    type: "collapse",
+    name: "Edit Consumption Device",
+    key: "edit-consumption-device",
+    icon: <Icon fontSize="small">bolt</Icon>,
+    route: "/add-consumption-device/:id",
+    component: <AddConsumptionDevice/>,
+  },
+  {
+    type: "collapse",
+    name: "Add Consumption Device",
+    key: "add-consumption-device",
+    icon: <Icon fontSize="small">bolt</Icon>,
+    route: "/add-consumption-device",
+    component: <AddConsumptionDevice/>,
   },
   {
     type: "collapse",
@@ -157,7 +175,7 @@ const routes = [
     key: "consumption",
     icon: <Icon fontSize="small">microwave_icon</Icon>,
     route: "/consumption",
-    component: <div/>,
+    component: <Consumption/>,
   },
 
   /*  {

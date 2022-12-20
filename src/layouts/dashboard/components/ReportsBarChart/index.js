@@ -15,7 +15,7 @@
 
 // porp-types is a library for typechecking of props
 import PropTypes from "prop-types";
-
+import PauseIcon from '@mui/icons-material/Pause';
 // react-chartjs-2 components
 // @mui material components
 import Card from "@mui/material/Card";
@@ -27,6 +27,8 @@ import MDTypography from "components/MDTypography";
 
 // ReportsBarChart configurations
 import Grid from "@mui/material/Grid";
+import {Button} from "@mui/material";
+import IconButton from "@mui/material/IconButton";
 
 function ReportsBarChart({color}) {
   return (
@@ -49,9 +51,9 @@ function ReportsBarChart({color}) {
                   width="8rem"
                   height="8rem"
               >
-                <Icon fontSize="large" color="inherit">
-                  play_circle_outline_icon
-                </Icon>
+                <IconButton size="large" fontSize="large" color="inherit">
+                  <PauseIcon/>
+                </IconButton>
               </MDBox>
             </Grid>
             <Grid item>
