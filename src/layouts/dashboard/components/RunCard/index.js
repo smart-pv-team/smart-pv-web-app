@@ -29,7 +29,7 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
-function ReportsBarChart({color, running, setFarmRunning}) {
+function RunCard({color, running, setFarmRunning}) {
   const onClick = () => {
     setFarmRunning(!running)
   }
@@ -87,13 +87,13 @@ function ReportsBarChart({color, running, setFarmRunning}) {
 }
 
 // Setting default values for the props of ReportsBarChart
-ReportsBarChart.defaultProps = {
+RunCard.defaultProps = {
   color: "dark",
   description: "",
 };
 
 // Typechecking props for the ReportsBarChart
-ReportsBarChart.propTypes = {
+RunCard.propTypes = {
   color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
   title: PropTypes.string.isRequired,
   description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
@@ -101,4 +101,4 @@ ReportsBarChart.propTypes = {
   chart: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.array, PropTypes.object])).isRequired,
 };
 
-export default ReportsBarChart;
+export default RunCard;

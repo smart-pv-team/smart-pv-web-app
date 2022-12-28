@@ -1,8 +1,8 @@
 function timelineItem(theme, ownerState) {
-  const { borders } = theme;
-  const { lastItem, isDark } = ownerState;
+  const {borders} = theme;
+  const {lastItem, isDark} = ownerState;
 
-  const { borderWidth, borderColor } = borders;
+  const {borderWidth, borderColor} = borders;
 
   return {
     "&:after": {

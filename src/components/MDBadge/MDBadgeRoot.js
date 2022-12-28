@@ -1,30 +1,30 @@
 /**
-=========================================================
-* Material Dashboard 2 React - v2.1.0
-=========================================================
+ =========================================================
+ * Material Dashboard 2 React - v2.1.0
+ =========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+ * Product Page: https://www.creative-tim.com/product/material-dashboard-react
+ * Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-Coded by www.creative-tim.com
+ Coded by www.creative-tim.com
 
  =========================================================
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ */
 
 // @mui material components
 import Badge from "@mui/material/Badge";
-import { styled } from "@mui/material/styles";
+import {styled} from "@mui/material/styles";
 
-export default styled(Badge)(({ theme, ownerState }) => {
-  const { palette, typography, borders, functions } = theme;
-  const { color, circular, border, size, indicator, variant, container, children } = ownerState;
+export default styled(Badge)(({theme, ownerState}) => {
+  const {palette, typography, borders, functions} = theme;
+  const {color, circular, border, size, indicator, variant, container, children} = ownerState;
 
-  const { white, dark, gradients, badgeColors } = palette;
-  const { size: fontSize, fontWeightBold } = typography;
-  const { borderRadius, borderWidth } = borders;
-  const { pxToRem, linearGradient } = functions;
+  const {white, dark, gradients, badgeColors} = palette;
+  const {size: fontSize, fontWeightBold} = typography;
+  const {borderRadius, borderWidth} = borders;
+  const {pxToRem, linearGradient} = functions;
 
   // padding values
   const paddings = {
@@ -71,8 +71,8 @@ export default styled(Badge)(({ theme, ownerState }) => {
   // styles for the badge with variant="gradient"
   const gradientStyles = (colorProp) => {
     const backgroundValue = gradients[colorProp]
-      ? linearGradient(gradients[colorProp].main, gradients[colorProp].state)
-      : linearGradient(gradients.info.main, gradients.info.state);
+        ? linearGradient(gradients[colorProp].main, gradients[colorProp].state)
+        : linearGradient(gradients.info.main, gradients.info.state);
     const colorValue = colorProp === "light" ? dark.main : white.main;
 
     return {
@@ -84,8 +84,8 @@ export default styled(Badge)(({ theme, ownerState }) => {
   // styles for the badge with variant="contained"
   const containedStyles = (colorProp) => {
     const backgroundValue = badgeColors[colorProp]
-      ? badgeColors[colorProp].background
-      : badgeColors.info.background;
+        ? badgeColors[colorProp].background
+        : badgeColors.info.background;
     let colorValue = badgeColors[colorProp] ? badgeColors[colorProp].text : badgeColors.info.text;
 
     if (colorProp === "light") {

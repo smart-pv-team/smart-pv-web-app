@@ -1,33 +1,33 @@
 /**
-=========================================================
-* Material Dashboard 2 React - v2.1.0
-=========================================================
+ =========================================================
+ * Material Dashboard 2 React - v2.1.0
+ =========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+ * Product Page: https://www.creative-tim.com/product/material-dashboard-react
+ * Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-Coded by www.creative-tim.com
+ Coded by www.creative-tim.com
 
  =========================================================
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ */
 function navbar(theme, ownerState) {
-  const { palette, boxShadows, functions, transitions, breakpoints, borders } = theme;
-  const { transparentNavbar, absolute, light, darkMode } = ownerState;
+  const {palette, boxShadows, functions, transitions, breakpoints, borders} = theme;
+  const {transparentNavbar, absolute, light, darkMode} = ownerState;
 
-  const { dark, white, text, transparent, background } = palette;
-  const { navbarBoxShadow } = boxShadows;
-  const { rgba, pxToRem } = functions;
-  const { borderRadius } = borders;
+  const {dark, white, text, transparent, background} = palette;
+  const {navbarBoxShadow} = boxShadows;
+  const {rgba, pxToRem} = functions;
+  const {borderRadius} = borders;
 
   return {
     boxShadow: transparentNavbar || absolute ? "none" : navbarBoxShadow,
     backdropFilter: transparentNavbar || absolute ? "none" : `saturate(200%) blur(${pxToRem(30)})`,
     backgroundColor:
-      transparentNavbar || absolute
-        ? `${transparent.main} !important`
-        : rgba(darkMode ? background.default : white.main, 0.8),
+        transparentNavbar || absolute
+            ? `${transparent.main} !important`
+            : rgba(darkMode ? background.default : white.main, 0.8),
 
     color: () => {
       let color;
@@ -72,7 +72,7 @@ function navbar(theme, ownerState) {
   };
 }
 
-const navbarContainer = ({ breakpoints }) => ({
+const navbarContainer = ({breakpoints}) => ({
   flexDirection: "column",
   alignItems: "flex-start",
   justifyContent: "space-between",
@@ -87,7 +87,7 @@ const navbarContainer = ({ breakpoints }) => ({
   },
 });
 
-const navbarRow = ({ breakpoints }, { isMini }) => ({
+const navbarRow = ({breakpoints}, {isMini}) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
@@ -104,7 +104,7 @@ const navbarRow = ({ breakpoints }, { isMini }) => ({
   },
 });
 
-const navbarIconButton = ({ typography: { size }, breakpoints }) => ({
+const navbarIconButton = ({typography: {size}, breakpoints}) => ({
   px: 1,
 
   "& .material-icons, .material-icons-round": {
@@ -122,7 +122,7 @@ const navbarIconButton = ({ typography: { size }, breakpoints }) => ({
   },
 });
 
-const navbarMobileMenu = ({ breakpoints }) => ({
+const navbarMobileMenu = ({breakpoints}) => ({
   display: "inline-block",
   lineHeight: 0,
 
@@ -131,4 +131,4 @@ const navbarMobileMenu = ({ breakpoints }) => ({
   },
 });
 
-export { navbar, navbarContainer, navbarRow, navbarIconButton, navbarMobileMenu };
+export {navbar, navbarContainer, navbarRow, navbarIconButton, navbarMobileMenu};

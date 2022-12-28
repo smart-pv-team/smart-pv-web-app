@@ -1,19 +1,19 @@
 /**
-=========================================================
-* Material Dashboard 2 React - v2.1.0
-=========================================================
+ =========================================================
+ * Material Dashboard 2 React - v2.1.0
+ =========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+ * Product Page: https://www.creative-tim.com/product/material-dashboard-react
+ * Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-Coded by www.creative-tim.com
+ Coded by www.creative-tim.com
 
  =========================================================
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ */
 
-import { forwardRef } from "react";
+import {forwardRef} from "react";
 
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
@@ -24,21 +24,21 @@ import MDTypography from "components/MDTypography";
 // Custom styles for MDProgress
 import MDProgressRoot from "components/MDProgress/MDProgressRoot";
 
-const MDProgress = forwardRef(({ variant, color, value, label, ...rest }, ref) => (
-  <>
-    {label && (
-      <MDTypography variant="button" fontWeight="medium" color="text">
-        {value}%
-      </MDTypography>
-    )}
-    <MDProgressRoot
-      {...rest}
-      ref={ref}
-      variant="determinate"
-      value={value}
-      ownerState={{ color, value, variant }}
-    />
-  </>
+const MDProgress = forwardRef(({variant, color, value, label, ...rest}, ref) => (
+    <>
+      {label && (
+          <MDTypography variant="button" fontWeight="medium" color="text">
+            {value}%
+          </MDTypography>
+      )}
+      <MDProgressRoot
+          {...rest}
+          ref={ref}
+          variant="determinate"
+          value={value}
+          ownerState={{color, value, variant}}
+      />
+    </>
 ));
 
 // Setting default values for the props of MDProgress

@@ -1,19 +1,19 @@
 /**
-=========================================================
-* Material Dashboard 2 React - v2.1.0
-=========================================================
+ =========================================================
+ * Material Dashboard 2 React - v2.1.0
+ =========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+ * Product Page: https://www.creative-tim.com/product/material-dashboard-react
+ * Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-Coded by www.creative-tim.com
+ Coded by www.creative-tim.com
 
  =========================================================
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ */
 
-import { forwardRef } from "react";
+import {forwardRef} from "react";
 
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
@@ -22,13 +22,13 @@ import PropTypes from "prop-types";
 import MDBoxRoot from "components/MDBox/MDBoxRoot";
 
 const MDBox = forwardRef(
-  ({ variant, bgColor, color, opacity, borderRadius, shadow, coloredShadow, ...rest }, ref) => (
-    <MDBoxRoot
-      {...rest}
-      ref={ref}
-      ownerState={{ variant, bgColor, color, opacity, borderRadius, shadow, coloredShadow }}
-    />
-  )
+    ({variant, bgColor, color, opacity, borderRadius, shadow, coloredShadow, ...rest}, ref) => (
+        <MDBoxRoot
+            {...rest}
+            ref={ref}
+            ownerState={{variant, bgColor, color, opacity, borderRadius, shadow, coloredShadow}}
+        />
+    )
 );
 
 // Setting default values for the props of MDBox

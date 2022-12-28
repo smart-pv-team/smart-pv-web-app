@@ -36,8 +36,6 @@ export default function Farm({farm, setFarm}) {
   const {
     register,
     handleSubmit,
-    control,
-    reset,
     formState: {errors},
   } = useForm({
     resolver: yupResolver(schema),

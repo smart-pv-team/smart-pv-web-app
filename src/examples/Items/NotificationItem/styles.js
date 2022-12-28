@@ -1,8 +1,8 @@
 function menuItem(theme) {
-  const { palette, borders, transitions } = theme;
+  const {palette, borders, transitions} = theme;
 
-  const { secondary, light, dark } = palette;
-  const { borderRadius } = borders;
+  const {secondary, light, dark} = palette;
+  const {borderRadius} = borders;
 
   return {
     display: "flex",

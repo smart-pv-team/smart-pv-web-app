@@ -1,30 +1,8 @@
-/**
- =========================================================
- * Material Dashboard 2 React - v2.1.0
- =========================================================
-
- * Product Page: https://www.creative-tim.com/product/material-dashboard-react
- * Copyright 2022 Creative Tim (https://www.creative-tim.com)
-
- Coded by www.creative-tim.com
-
- =========================================================
-
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- */
-
-// @mui material components
 import Grid from "@mui/material/Grid";
-
-// Material Dashboard 2 React components
 import MDBox from "components/MDBox";
-
-// Material Dashboard 2 React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
-
-// Billing page components
 import Icon from "@mui/material/Icon";
 import MDTypography from "../../../components/MDTypography";
 import Card from "@mui/material/Card";
@@ -93,8 +71,6 @@ function AddConsumptionDevice({updateConsumingDevice, farmsIds, deviceModels, de
   });
 
   const addHeader = (data) => {
-    console.log("ADD HEADE");
-    console.log(data);
     setEndpoints((endpoints) => {
       let endpoint = endpoints.filter((e) => e.action === data.action)[0]
       const idx = endpoints.indexOf(endpoint)
@@ -109,8 +85,6 @@ function AddConsumptionDevice({updateConsumingDevice, farmsIds, deviceModels, de
         httpHeaders: httpHeaders
       }
       endpoints[idx] = endpoint
-      console.log(endpoints)
-
       return endpoints
     })
   };
@@ -132,8 +106,6 @@ function AddConsumptionDevice({updateConsumingDevice, farmsIds, deviceModels, de
     })
   }
   const removeHttpHeader = (header, action) => {
-    console.log("remove http header")
-    console.log(header)
     setEndpoints((endpoints) => {
       let endpoint = endpoints.filter(e => e.action === action)[0]
       let httpHeaders = endpoint.httpHeaders
@@ -150,8 +122,6 @@ function AddConsumptionDevice({updateConsumingDevice, farmsIds, deviceModels, de
 
   }
   const onSubmitHandler = (data) => {
-    console.log("onSubmitHandler")
-    console.log(data)
     updateConsumingDevice(data);
   };
 
@@ -237,7 +207,6 @@ function AddConsumptionDevice({updateConsumingDevice, farmsIds, deviceModels, de
               <Actions endpoints={endpoints} removeAction={removeAction} removeHttpHeader={removeHttpHeader}/>
             </Grid>
           </Grid>
-
         </MDBox>
         <Footer/>
       </DashboardLayout>

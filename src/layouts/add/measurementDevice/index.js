@@ -1,34 +1,12 @@
-/**
- =========================================================
- * Material Dashboard 2 React - v2.1.0
- =========================================================
-
- * Product Page: https://www.creative-tim.com/product/material-dashboard-react
- * Copyright 2022 Creative Tim (https://www.creative-tim.com)
-
- Coded by www.creative-tim.com
-
- =========================================================
-
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- */
-
-// @mui material components
 import Grid from "@mui/material/Grid";
-
-// Material Dashboard 2 React components
 import MDBox from "components/MDBox";
-
-// Material Dashboard 2 React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
-
-// Billing page components
-import DeviceInfo from "layouts/add/measurementDevice/components/DeviceInfo";
-import Action from "layouts/add/measurementDevice/components/Action";
-import HttpHeaders from "layouts/add/measurementDevice/components/HttpHeaders";
-import AddHttpHeader from "layouts/add/measurementDevice/components/AddHttpHeader";
+import DeviceInfo from "./components/DeviceInfo";
+import Action from "./components/Action";
+import HttpHeaders from "./components/HttpHeaders";
+import AddHttpHeader from "./components/AddHttpHeader";
 import Icon from "@mui/material/Icon";
 import MDTypography from "../../../components/MDTypography";
 import Card from "@mui/material/Card";

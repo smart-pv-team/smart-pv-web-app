@@ -1,17 +1,17 @@
 /**
-=========================================================
-* Material Dashboard 2 React - v2.1.0
-=========================================================
+ =========================================================
+ * Material Dashboard 2 React - v2.1.0
+ =========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+ * Product Page: https://www.creative-tim.com/product/material-dashboard-react
+ * Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-Coded by www.creative-tim.com
+ Coded by www.creative-tim.com
 
  =========================================================
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ */
 
 // Material Dashboard 2 React base styles
 import colors from "assets/theme/base/colors";
@@ -20,15 +20,15 @@ import colors from "assets/theme/base/colors";
 import rgba from "assets/theme/functions/rgba";
 import pxToRem from "assets/theme/functions/pxToRem";
 
-const { dark, transparent, white } = colors;
+const {dark, transparent, white} = colors;
 
 const divider = {
   styleOverrides: {
     root: {
       backgroundColor: transparent.main,
       backgroundImage: `linear-gradient(to right, ${rgba(dark.main, 0)}, ${rgba(
-        dark.main,
-        0.4
+          dark.main,
+          0.4
       )}, ${rgba(dark.main, 0)}) !important`,
       height: pxToRem(1),
       margin: `${pxToRem(16)} 0`,
@@ -39,8 +39,8 @@ const divider = {
     vertical: {
       backgroundColor: transparent.main,
       backgroundImage: `linear-gradient(to bottom, ${rgba(dark.main, 0)}, ${rgba(
-        dark.main,
-        0.4
+          dark.main,
+          0.4
       )}, ${rgba(dark.main, 0)}) !important`,
       width: pxToRem(1),
       height: "100%",
@@ -51,14 +51,14 @@ const divider = {
     light: {
       backgroundColor: transparent.main,
       backgroundImage: `linear-gradient(to right, ${rgba(white.main, 0)}, ${white.main}, ${rgba(
-        white.main,
-        0
+          white.main,
+          0
       )}) !important`,
 
       "&.MuiDivider-vertical": {
         backgroundImage: `linear-gradient(to bottom, ${rgba(white.main, 0)}, ${white.main}, ${rgba(
-          white.main,
-          0
+            white.main,
+            0
         )}) !important`,
       },
     },

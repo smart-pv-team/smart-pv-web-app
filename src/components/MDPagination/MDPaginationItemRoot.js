@@ -1,32 +1,32 @@
 /**
-=========================================================
-* Material Dashboard 2 React - v2.1.0
-=========================================================
+ =========================================================
+ * Material Dashboard 2 React - v2.1.0
+ =========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+ * Product Page: https://www.creative-tim.com/product/material-dashboard-react
+ * Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-Coded by www.creative-tim.com
+ Coded by www.creative-tim.com
 
  =========================================================
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ */
 
 // @mui material components
-import { styled } from "@mui/material/styles";
+import {styled} from "@mui/material/styles";
 
 // Material Dashboard 2 React components
 import MDButton from "components/MDButton";
 
-export default styled(MDButton)(({ theme, ownerState }) => {
-  const { borders, functions, typography, palette } = theme;
-  const { variant, paginationSize, active } = ownerState;
+export default styled(MDButton)(({theme, ownerState}) => {
+  const {borders, functions, typography, palette} = theme;
+  const {variant, paginationSize, active} = ownerState;
 
-  const { borderColor } = borders;
-  const { pxToRem } = functions;
-  const { fontWeightRegular, size: fontSize } = typography;
-  const { light } = palette;
+  const {borderColor} = borders;
+  const {pxToRem} = functions;
+  const {fontWeightRegular, size: fontSize} = typography;
+  const {light} = palette;
 
   // width, height, minWidth and minHeight values
   let sizeValue = pxToRem(36);

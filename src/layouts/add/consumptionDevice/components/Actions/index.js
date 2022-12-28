@@ -26,8 +26,6 @@ function Actions({endpoints, removeAction, removeHttpHeader}) {
       name: index + 1
     }
   })
-  console.log("ACTION")
-  console.log(endpointsWithNames)
   const [action, setAction] = useState(1);
   const {columns, rows} = actionDateToTableFormat(endpointsWithNames.filter((e) => e.name === action)[0] || undefined,
       removeHttpHeader);

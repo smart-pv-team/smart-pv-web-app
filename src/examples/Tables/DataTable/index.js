@@ -1,25 +1,25 @@
 /**
-=========================================================
-* Material Dashboard 2 React - v2.1.0
-=========================================================
+ =========================================================
+ * Material Dashboard 2 React - v2.1.0
+ =========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+ * Product Page: https://www.creative-tim.com/product/material-dashboard-react
+ * Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-Coded by www.creative-tim.com
+ Coded by www.creative-tim.com
 
  =========================================================
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ */
 
-import { useMemo, useEffect, useState } from "react";
+import {useEffect, useMemo, useState} from "react";
 
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
 
 // react-table components
-import { useTable, usePagination, useGlobalFilter, useAsyncDebounce, useSortBy } from "react-table";
+import {useAsyncDebounce, useGlobalFilter, usePagination, useSortBy, useTable} from "react-table";
 
 // @mui material components
 import Table from "@mui/material/Table";
@@ -50,16 +50,16 @@ function DataTable({
 }) {
   const defaultValue = entriesPerPage.defaultValue ? entriesPerPage.defaultValue : 10;
   const entries = entriesPerPage.entries
-    ? entriesPerPage.entries.map((el) => el.toString())
-    : ["5", "10", "15", "20", "25"];
+      ? entriesPerPage.entries.map((el) => el.toString())
+      : ["5", "10", "15", "20", "25"];
   const columns = useMemo(() => table.columns, [table]);
   const data = useMemo(() => table.rows, [table]);
 
   const tableInstance = useTable(
-    { columns, data, initialState: { pageIndex: 0 } },
-    useGlobalFilter,
-    useSortBy,
-    usePagination
+      {columns, data, initialState: {pageIndex: 0}},
+      useGlobalFilter,
+      useSortBy,
+      usePagination
   );
 
   const {
@@ -77,7 +77,7 @@ function DataTable({
     previousPage,
     setPageSize,
     setGlobalFilter,
-    state: { pageIndex, pageSize, globalFilter },
+    state: {pageIndex, pageSize, globalFilter},
   } = tableInstance;
 
   // Set the default value for the entries per page when component mounts
@@ -88,25 +88,25 @@ function DataTable({
 
   // Render the paginations
   const renderPagination = pageOptions.map((option) => (
-    <MDPagination
-      item
-      key={option}
-      onClick={() => gotoPage(Number(option))}
-      active={pageIndex === option}
-    >
-      {option + 1}
-    </MDPagination>
+      <MDPagination
+          item
+          key={option}
+          onClick={() => gotoPage(Number(option))}
+          active={pageIndex === option}
+      >
+        {option + 1}
+      </MDPagination>
   ));
 
   // Handler for the input to set the pagination index
-  const handleInputPagination = ({ target: { value } }) =>
-    value > pageOptions.length || value < 0 ? gotoPage(0) : gotoPage(Number(value));
+  const handleInputPagination = ({target: {value}}) =>
+      value > pageOptions.length || value < 0 ? gotoPage(0) : gotoPage(Number(value));
 
   // Customized page options starting from 1
   const customizedPageOptions = pageOptions.map((option) => option + 1);
 
   // Setting value for the pagination input
-  const handleInputPaginationValue = ({ target: value }) => gotoPage(Number(value.value - 1));
+  const handleInputPaginationValue = ({target: value}) => gotoPage(Number(value.value - 1));
 
   // Search input value state
   const [search, setSearch] = useState(globalFilter);
@@ -146,133 +146,133 @@ function DataTable({
   }
 
   return (
-    <TableContainer sx={{ boxShadow: "none" }}>
-      {entriesPerPage || canSearch ? (
-        <MDBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
-          {entriesPerPage && (
-            <MDBox display="flex" alignItems="center">
-              <Autocomplete
-                disableClearable
-                value={pageSize.toString()}
-                options={entries}
-                onChange={(event, newValue) => {
-                  setEntriesPerPage(parseInt(newValue, 10));
-                }}
-                size="small"
-                sx={{ width: "5rem" }}
-                renderInput={(params) => <MDInput {...params} />}
-              />
-              <MDTypography variant="caption" color="secondary">
-                &nbsp;&nbsp;entries per page
-              </MDTypography>
+      <TableContainer sx={{boxShadow: "none"}}>
+        {entriesPerPage || canSearch ? (
+            <MDBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
+              {entriesPerPage && (
+                  <MDBox display="flex" alignItems="center">
+                    <Autocomplete
+                        disableClearable
+                        value={pageSize.toString()}
+                        options={entries}
+                        onChange={(event, newValue) => {
+                          setEntriesPerPage(parseInt(newValue, 10));
+                        }}
+                        size="small"
+                        sx={{width: "5rem"}}
+                        renderInput={(params) => <MDInput {...params} />}
+                    />
+                    <MDTypography variant="caption" color="secondary">
+                      &nbsp;&nbsp;entries per page
+                    </MDTypography>
+                  </MDBox>
+              )}
+              {canSearch && (
+                  <MDBox width="12rem" ml="auto">
+                    <MDInput
+                        placeholder="Search..."
+                        value={search}
+                        size="small"
+                        fullWidth
+                        onChange={({currentTarget}) => {
+                          setSearch(search);
+                          onSearchChange(currentTarget.value);
+                        }}
+                    />
+                  </MDBox>
+              )}
             </MDBox>
-          )}
-          {canSearch && (
-            <MDBox width="12rem" ml="auto">
-              <MDInput
-                placeholder="Search..."
-                value={search}
-                size="small"
-                fullWidth
-                onChange={({ currentTarget }) => {
-                  setSearch(search);
-                  onSearchChange(currentTarget.value);
-                }}
-              />
-            </MDBox>
-          )}
-        </MDBox>
-      ) : null}
-      <Table {...getTableProps()}>
-        <MDBox component="thead">
-          {headerGroups.map((headerGroup) => (
-            <TableRow {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <DataTableHeadCell
-                  {...column.getHeaderProps(isSorted && column.getSortByToggleProps())}
-                  width={column.width ? column.width : "auto"}
-                  align={column.align ? column.align : "left"}
-                  sorted={setSortedValue(column)}
-                >
-                  {column.render("Header")}
-                </DataTableHeadCell>
-              ))}
-            </TableRow>
-          ))}
-        </MDBox>
-        <TableBody {...getTableBodyProps()}>
-          {page.map((row, key) => {
-            prepareRow(row);
-            return (
-              <TableRow {...row.getRowProps()}>
-                {row.cells.map((cell) => (
-                  <DataTableBodyCell
-                    noBorder={noEndBorder && rows.length - 1 === key}
-                    align={cell.column.align ? cell.column.align : "left"}
-                    {...cell.getCellProps()}
-                  >
-                    {cell.render("Cell")}
-                  </DataTableBodyCell>
-                ))}
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-
-      <MDBox
-        display="flex"
-        flexDirection={{ xs: "column", sm: "row" }}
-        justifyContent="space-between"
-        alignItems={{ xs: "flex-start", sm: "center" }}
-        p={!showTotalEntries && pageOptions.length === 1 ? 0 : 3}
-      >
-        {showTotalEntries && (
-          <MDBox mb={{ xs: 3, sm: 0 }}>
-            <MDTypography variant="button" color="secondary" fontWeight="regular">
-              Showing {entriesStart} to {entriesEnd} of {rows.length} entries
-            </MDTypography>
+        ) : null}
+        <Table {...getTableProps()}>
+          <MDBox component="thead">
+            {headerGroups.map((headerGroup) => (
+                <TableRow {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map((column) => (
+                      <DataTableHeadCell
+                          {...column.getHeaderProps(isSorted && column.getSortByToggleProps())}
+                          width={column.width ? column.width : "auto"}
+                          align={column.align ? column.align : "left"}
+                          sorted={setSortedValue(column)}
+                      >
+                        {column.render("Header")}
+                      </DataTableHeadCell>
+                  ))}
+                </TableRow>
+            ))}
           </MDBox>
-        )}
-        {pageOptions.length > 1 && (
-          <MDPagination
-            variant={pagination.variant ? pagination.variant : "gradient"}
-            color={pagination.color ? pagination.color : "info"}
-          >
-            {canPreviousPage && (
-              <MDPagination item onClick={() => previousPage()}>
-                <Icon sx={{ fontWeight: "bold" }}>chevron_left</Icon>
-              </MDPagination>
-            )}
-            {renderPagination.length > 6 ? (
-              <MDBox width="5rem" mx={1}>
-                <MDInput
-                  inputProps={{ type: "number", min: 1, max: customizedPageOptions.length }}
-                  value={customizedPageOptions[pageIndex]}
-                  onChange={(handleInputPagination, handleInputPaginationValue)}
-                />
+          <TableBody {...getTableBodyProps()}>
+            {page.map((row, key) => {
+              prepareRow(row);
+              return (
+                  <TableRow {...row.getRowProps()}>
+                    {row.cells.map((cell) => (
+                        <DataTableBodyCell
+                            noBorder={noEndBorder && rows.length - 1 === key}
+                            align={cell.column.align ? cell.column.align : "left"}
+                            {...cell.getCellProps()}
+                        >
+                          {cell.render("Cell")}
+                        </DataTableBodyCell>
+                    ))}
+                  </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+
+        <MDBox
+            display="flex"
+            flexDirection={{xs: "column", sm: "row"}}
+            justifyContent="space-between"
+            alignItems={{xs: "flex-start", sm: "center"}}
+            p={!showTotalEntries && pageOptions.length === 1 ? 0 : 3}
+        >
+          {showTotalEntries && (
+              <MDBox mb={{xs: 3, sm: 0}}>
+                <MDTypography variant="button" color="secondary" fontWeight="regular">
+                  Showing {entriesStart} to {entriesEnd} of {rows.length} entries
+                </MDTypography>
               </MDBox>
-            ) : (
-              renderPagination
-            )}
-            {canNextPage && (
-              <MDPagination item onClick={() => nextPage()}>
-                <Icon sx={{ fontWeight: "bold" }}>chevron_right</Icon>
+          )}
+          {pageOptions.length > 1 && (
+              <MDPagination
+                  variant={pagination.variant ? pagination.variant : "gradient"}
+                  color={pagination.color ? pagination.color : "info"}
+              >
+                {canPreviousPage && (
+                    <MDPagination item onClick={() => previousPage()}>
+                      <Icon sx={{fontWeight: "bold"}}>chevron_left</Icon>
+                    </MDPagination>
+                )}
+                {renderPagination.length > 6 ? (
+                    <MDBox width="5rem" mx={1}>
+                      <MDInput
+                          inputProps={{type: "number", min: 1, max: customizedPageOptions.length}}
+                          value={customizedPageOptions[pageIndex]}
+                          onChange={(handleInputPagination, handleInputPaginationValue)}
+                      />
+                    </MDBox>
+                ) : (
+                    renderPagination
+                )}
+                {canNextPage && (
+                    <MDPagination item onClick={() => nextPage()}>
+                      <Icon sx={{fontWeight: "bold"}}>chevron_right</Icon>
+                    </MDPagination>
+                )}
               </MDPagination>
-            )}
-          </MDPagination>
-        )}
-      </MDBox>
-    </TableContainer>
+          )}
+        </MDBox>
+      </TableContainer>
   );
 }
 
 // Setting default values for the props of DataTable
 DataTable.defaultProps = {
-  entriesPerPage: { defaultValue: 10, entries: [5, 10, 15, 20, 25] },
+  entriesPerPage: {defaultValue: 10, entries: [5, 10, 15, 20, 25]},
   canSearch: false,
   showTotalEntries: true,
-  pagination: { variant: "gradient", color: "info" },
+  pagination: {variant: "gradient", color: "info"},
   isSorted: true,
   noEndBorder: false,
 };

@@ -1,31 +1,31 @@
 /* eslint-disable prefer-destructuring */
 /**
-=========================================================
-* Material Dashboard 2 React - v2.1.0
-=========================================================
+ =========================================================
+ * Material Dashboard 2 React - v2.1.0
+ =========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+ * Product Page: https://www.creative-tim.com/product/material-dashboard-react
+ * Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
-Coded by www.creative-tim.com
+ Coded by www.creative-tim.com
 
  =========================================================
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ */
 
 // @mui material components
 import Button from "@mui/material/Button";
-import { styled } from "@mui/material/styles";
+import {styled} from "@mui/material/styles";
 
-export default styled(Button)(({ theme, ownerState }) => {
-  const { palette, functions, borders, boxShadows } = theme;
-  const { color, variant, size, circular, iconOnly, darkMode } = ownerState;
+export default styled(Button)(({theme, ownerState}) => {
+  const {palette, functions, borders, boxShadows} = theme;
+  const {color, variant, size, circular, iconOnly, darkMode} = ownerState;
 
-  const { white, text, transparent, gradients, grey } = palette;
-  const { boxShadow, linearGradient, pxToRem, rgba } = functions;
-  const { borderRadius } = borders;
-  const { colored } = boxShadows;
+  const {white, text, transparent, gradients, grey} = palette;
+  const {boxShadow, linearGradient, pxToRem, rgba} = functions;
+  const {borderRadius} = borders;
+  const {colored} = boxShadows;
 
   // styles for the button with variant="contained"
   const containedStyles = () => {
@@ -37,23 +37,23 @@ export default styled(Button)(({ theme, ownerState }) => {
 
     // boxShadow value
     const boxShadowValue = colored[color]
-      ? `${boxShadow([0, 3], [3, 0], palette[color].main, 0.15)}, ${boxShadow(
-          [0, 3],
-          [1, -2],
-          palette[color].main,
-          0.2
+        ? `${boxShadow([0, 3], [3, 0], palette[color].main, 0.15)}, ${boxShadow(
+            [0, 3],
+            [1, -2],
+            palette[color].main,
+            0.2
         )}, ${boxShadow([0, 1], [5, 0], palette[color].main, 0.15)}`
-      : "none";
+        : "none";
 
     // boxShadow value when button is hovered
     const hoveredBoxShadowValue = colored[color]
-      ? `${boxShadow([0, 14], [26, -12], palette[color].main, 0.4)}, ${boxShadow(
-          [0, 4],
-          [23, 0],
-          palette[color].main,
-          0.15
+        ? `${boxShadow([0, 14], [26, -12], palette[color].main, 0.4)}, ${boxShadow(
+            [0, 4],
+            [23, 0],
+            palette[color].main,
+            0.15
         )}, ${boxShadow([0, 8], [10, -5], palette[color].main, 0.2)}`
-      : "none";
+        : "none";
 
     // color value
     let colorValue = white.main;
@@ -86,8 +86,8 @@ export default styled(Button)(({ theme, ownerState }) => {
       "&:focus:not(:hover)": {
         backgroundColor: focusedBackgroundValue,
         boxShadow: palette[color]
-          ? boxShadow([0, 0], [0, 3.2], palette[color].main, 0.5)
-          : boxShadow([0, 0], [0, 3.2], white.main, 0.5),
+            ? boxShadow([0, 0], [0, 3.2], palette[color].main, 0.5)
+            : boxShadow([0, 0], [0, 3.2], white.main, 0.5),
       },
 
       "&:disabled": {
@@ -107,8 +107,8 @@ export default styled(Button)(({ theme, ownerState }) => {
 
     // boxShadow value
     const boxShadowValue = palette[color]
-      ? boxShadow([0, 0], [0, 3.2], palette[color].main, 0.5)
-      : boxShadow([0, 0], [0, 3.2], white.main, 0.5);
+        ? boxShadow([0, 0], [0, 3.2], palette[color].main, 0.5)
+        : boxShadow([0, 0], [0, 3.2], white.main, 0.5);
 
     // border color value
     let borderColorValue = palette[color] ? palette[color].main : rgba(white.main, 0.75);
@@ -149,29 +149,29 @@ export default styled(Button)(({ theme, ownerState }) => {
   const gradientStyles = () => {
     // background value
     const backgroundValue =
-      color === "white" || !gradients[color]
-        ? white.main
-        : linearGradient(gradients[color].main, gradients[color].state);
+        color === "white" || !gradients[color]
+            ? white.main
+            : linearGradient(gradients[color].main, gradients[color].state);
 
     // boxShadow value
     const boxShadowValue = colored[color]
-      ? `${boxShadow([0, 3], [3, 0], palette[color].main, 0.15)}, ${boxShadow(
-          [0, 3],
-          [1, -2],
-          palette[color].main,
-          0.2
+        ? `${boxShadow([0, 3], [3, 0], palette[color].main, 0.15)}, ${boxShadow(
+            [0, 3],
+            [1, -2],
+            palette[color].main,
+            0.2
         )}, ${boxShadow([0, 1], [5, 0], palette[color].main, 0.15)}`
-      : "none";
+        : "none";
 
     // boxShadow value when button is hovered
     const hoveredBoxShadowValue = colored[color]
-      ? `${boxShadow([0, 14], [26, -12], palette[color].main, 0.4)}, ${boxShadow(
-          [0, 4],
-          [23, 0],
-          palette[color].main,
-          0.15
+        ? `${boxShadow([0, 14], [26, -12], palette[color].main, 0.4)}, ${boxShadow(
+            [0, 4],
+            [23, 0],
+            palette[color].main,
+            0.15
         )}, ${boxShadow([0, 8], [10, -5], palette[color].main, 0.2)}`
-      : "none";
+        : "none";
 
     // color value
     let colorValue = white.main;
