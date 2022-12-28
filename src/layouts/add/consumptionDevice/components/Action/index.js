@@ -31,19 +31,15 @@ import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
 
-function Action({addAction,responseOptions}) {
+function AddAction({addAction, responseOptions}) {
   const schema = yup.object().shape({
     action: yup.string().required(),
     description: yup.string(),
-    endpoint: yup.string(),
-    headers: yup.array().of(
-        yup.object().shape({
-          header: yup.string(),
-          value: yup.string()
-        })
-    ),
+    endpoint: yup.string().required(),
+    httpHeaders: yup.array(),
     httpMethod: yup.string().oneOf(["PATCH", "PUT", "GET", "POST"]).required(),
-    responseClass: yup.string()
+    responseClass: yup.string().required(),
+    body: yup.string()
   })
 
   const {
@@ -51,15 +47,14 @@ function Action({addAction,responseOptions}) {
     handleSubmit,
     control,
     formState: {errors},
-    setValue
   } = useForm({
     resolver: yupResolver(schema),
   });
 
   const addActionHandler = (data) => {
+    console.log(data)
     addAction(data)
   }
-
 
   return (
       <Card sx={{height: "100%"}}>
@@ -68,7 +63,7 @@ function Action({addAction,responseOptions}) {
             Add action
           </MDTypography>
           <MDBox display="flex" alignItems="flex-start">
-            <MDButton variant="gradient" color="dark" onClick={()=>{handleSubmit(addActionHandler)}}>
+            <MDButton variant="gradient" color="dark" onClick={handleSubmit(addActionHandler)}>
               <Icon sx={{fontWeight: "bold"}}>add</Icon>
               &nbsp;Add new action
             </MDButton>
@@ -87,9 +82,9 @@ function Action({addAction,responseOptions}) {
                 <Icon sx={{color: 'action.active', mr: 1, my: 0.5}}>
                   keyboard_double_arrow_right_icon
                 </Icon>
-                <MDInput id="name" label="Action" fullWidth variant="standard"
-                         error={errors["endpoint"]?.message} {...register("endpoint")}
-                         helperText={errors["endpoint"]?.message}/>
+                <MDInput id="action" label="Action" fullWidth variant="standard"
+                         error={errors["action"]?.message} {...register("action")}
+                         helperText={errors["action"]?.message}/>
               </MDBox>
             </Grid>
             <Grid item xs={24} md={24}>
@@ -116,7 +111,24 @@ function Action({addAction,responseOptions}) {
             <Grid item xs={24} md={24}>
               <CustomSelector control={control} errors={errors}
                               icon={<Icon sx={{color: 'action.active', my: 0.5}}>http</Icon>}
-                              id="responseClass" label="Select Response Class" options={responseOptions}/>
+                              id="responseClass" label="Select Response Class"
+                              options={responseOptions || "NO_RESPONSE"}/>
+            </Grid>
+            <Grid item xs={24} md={24}>
+              <MDBox
+                  borderRadius="lg"
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  p={2}
+              >
+                <Icon sx={{color: 'action.active', mr: 1, my: 0.5}}>
+                  document_scanner_icon
+                </Icon>
+                <MDInput id="body" label="Body" fullWidth multiline rows={5} variant="standard"
+                         error={errors["body"]?.message} {...register("body")}
+                         helperText={errors["body"]?.message}/>
+              </MDBox>
             </Grid>
             <Grid item xs={24} md={24}>
               <MDBox
@@ -129,7 +141,7 @@ function Action({addAction,responseOptions}) {
                 <Icon sx={{color: 'action.active', mr: 1, my: 0.5}}>
                   assignment
                 </Icon>
-                <MDInput id="name" label="Description" fullWidth variant="standard"
+                <MDInput id="description" label="Description" fullWidth variant="standard"
                          error={errors["description"]?.message} {...register("description")}
                          helperText={errors["description"]?.message}/>
               </MDBox>
@@ -140,4 +152,4 @@ function Action({addAction,responseOptions}) {
   );
 }
 
-export default Action;
+export default AddAction;

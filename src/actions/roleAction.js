@@ -30,10 +30,7 @@ export function fetchAdmin(uid) {
       if (response.status === StatusCodes.OK) {
         const {name, farmId, email} = await response.json()
         if (farmId) {
-          dispatch(setAdmin(uid, email, name, farmId))
-          return Promise.resolve("FarmSet");
-        } else {
-          return Promise.reject("SetFarm")
+          return dispatch(setAdmin(uid, email, name, farmId))
         }
       } else {
         throw new Error(response.status)
@@ -91,7 +88,7 @@ export function fetchUsers(adminId) {
       const response = await getAdminUsers(adminId)
       if (response.status === StatusCodes.OK) {
         const users = await response.json()
-        dispatch(setUsers(users))
+        return dispatch(setUsers(users))
       } else {
         throw new Error(response.status)
       }

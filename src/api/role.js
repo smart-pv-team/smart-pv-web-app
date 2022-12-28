@@ -1,5 +1,12 @@
-import {_delete, get, put} from "./requests";
-import {adminAddress, adminByTokenAddress, adminUsersAddress, userAddress, userByTokenAddress} from "./routes";
+import {_delete, get, patch, put} from "./requests";
+import {
+  adminAddress,
+  adminByTokenAddress,
+  adminByTokenFarmAddress,
+  adminUsersAddress,
+  userAddress,
+  userByTokenAddress
+} from "./routes";
 
 export async function putUser(user) {
   return put(userAddress, {params: user})
@@ -11,6 +18,10 @@ export async function putAdmin(admin) {
 
 export async function getAdminByToken(adminId) {
   return get(adminByTokenAddress(adminId))
+}
+
+export async function patchAdminByToken(adminId) {
+  return patch(adminByTokenFarmAddress(adminId))
 }
 
 export async function getUserByToken(userId) {

@@ -16,10 +16,11 @@ import Icon from "@mui/material/Icon";
 export default function Farm({farm, setFarm}) {
 
   const schema = yup.object().shape({
-    id: yup.string().required(),
+    id: yup.string(),
     name: yup.string().required(),
     description: yup.string().required(),
-    minutesBetweenMeasurements: yup.number().required(),
+    minutesBetweenDeviceStatusSwitch: yup.number().required(),
+    minutesToAverageMeasurement: yup.number().required(),
     energyLimit: yup.number().required()
   });
 
@@ -27,7 +28,8 @@ export default function Farm({farm, setFarm}) {
     id: farm.id,
     name: farm.name,
     description: farm.description,
-    minutesBetweenMeasurements: farm.minutesBetweenMeasurements,
+    minutesBetweenDeviceStatusSwitch: farm.minutesBetweenDeviceStatusSwitch,
+    minutesToAverageMeasurement: farm.minutesToAverageMeasurement,
     energyLimit: farm.energyLimit
   } : {}
 
@@ -109,10 +111,12 @@ export default function Farm({farm, setFarm}) {
                       <Icon sx={{color: 'action.active', mr: 1, my: 0.5}}>
                         access_time_icon
                       </Icon>
-                      <MDInput id="minutesBetweenMeasurements" label="Minutes Between Measurements" fullWidth
+                      <MDInput id="minutesBetweenDeviceStatusSwitch" label="Minutes Between Device Status Switch"
+                               fullWidth
                                variant="standard"
-                               error={errors["minutesBetweenMeasurements"]?.message} {...register(
-                          "minutesBetweenMeasurements")} helperText={errors["minutesBetweenMeasurements"]?.message}/>
+                               error={errors["minutesBetweenDeviceStatusSwitch"]?.message} {...register(
+                          "minutesBetweenDeviceStatusSwitch")}
+                               helperText={errors["minutesBetweenDeviceStatusSwitch"]?.message}/>
                     </MDBox>
                     <MDBox
                         borderRadius="lg"
@@ -126,6 +130,21 @@ export default function Farm({farm, setFarm}) {
                       <MDInput id="energyLimit" label="Energy Limit" fullWidth variant="standard"
                                error={errors["energyLimit"]?.message} {...register("energyLimit")}
                                helperText={errors["energyLimit"]?.message}/>
+                    </MDBox>
+                    <MDBox
+                        borderRadius="lg"
+                        display="flex"
+                        justifyContent="space-between"
+                        alignItems="center"
+                        pb={4}>
+                      <Icon sx={{color: 'action.active', mr: 1, my: 0.5}}>
+                        access_time_icon
+                      </Icon>
+                      <MDInput id="minutesToAverageMeasurement" label="Minutes To Average Measurement" fullWidth
+                               variant="standard"
+                               error={errors["minutesToAverageMeasurement"]?.message} {...register(
+                          "minutesToAverageMeasurement")}
+                               helperText={errors["minutesToAverageMeasurement"]?.message}/>
                     </MDBox>
                     <MDBox mt={4} mb={1}>
                       <MDButton variant="gradient" color="info" fullWidth onClick={handleSubmit(onSubmitHandler)}>

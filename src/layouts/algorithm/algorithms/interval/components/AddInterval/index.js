@@ -47,7 +47,6 @@ function AddInterval({addInterval}) {
   });
 
   const onSubmitHandler = (data) => {
-    console.log(data)
     addInterval(data)
     reset();
   };

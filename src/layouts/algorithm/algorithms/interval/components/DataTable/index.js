@@ -36,21 +36,22 @@ import MDPagination from "components/MDPagination";
 // Material Dashboard 2 React example components
 import DataTableHeadCell from "examples/Tables/DataTable/DataTableHeadCell";
 import DataTableBodyCell from "examples/Tables/DataTable/DataTableBodyCell";
+import MDButton from "../../../../../../components/MDButton";
 
 function DataTable({
-  canSearch,
   showTotalEntries,
   noEndBorder,
   table,
   setInterval,
   intervals,
-  interval
+  interval,
+  deleteInterval
 }) {
-  const entries = Array.from({length: intervals.length}, (_, i) => i + 1)
+  const entries = intervals.map(i => i.name)
 
   const columns = useMemo(() => table.columns, [table]);
   const data = useMemo(() => table.rows, [table]);
-  const pageOptions = intervals.map((i) => i.id);
+  const pageOptions = intervals.map(i => i.name)
   const tableInstance = useTable(
       {columns, data},
       useGlobalFilter,
@@ -66,7 +67,6 @@ function DataTable({
     rows,
     page,
     setPageSize,
-    setGlobalFilter,
     state: {globalFilter},
   } = tableInstance;
 
@@ -83,26 +83,36 @@ function DataTable({
       </MDPagination>
   ));
 
-  const handleInputPagination = ({target: {value}}) =>
-      value > pageOptions.length || value < 0 ? setInterval(0) : setInterval(Number(value));
-  const handleInputPaginationValue = ({target: value}) => setInterval(Number(value.value));
+  const handleInputPagination = ({target: {value}}) => {
+    value > pageOptions.length || value <= 1 ? setInterval(1) : setInterval(Number(value));
+  }
+  const handleInputPaginationValue = ({target: value}) => {
+    setInterval(Number(value.value));
+  }
 
-  const getInterval = (interval) => intervals.find(i => i.id === interval)
-
+  const getInterval = (e) => {
+    return intervals.find(i => i.name === e)
+  }
+  console.log(interval)
   return (
       <TableContainer sx={{boxShadow: "none"}}>
         <MDBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
           <MDBox display="flex" alignItems="center">
             <MDTypography variant="h6" fontWeight="medium">
-              Interval number {getInterval(interval).id}:
-              [{getInterval(interval).lower} kW, {getInterval(interval).upper} kW]
+              {getInterval(interval) ? "Interval number " + `${interval}` +
+                  " [" + `${getInterval(interval).lowerBound}` + " kW, " + `${getInterval(interval).upperBound}`
+                  + " kW]" : "No intervals defined"}
             </MDTypography>
-
+            {getInterval(interval) ? <MDBox>
+              <MDButton variant="text" color="error" onClick={() => deleteInterval(getInterval(interval).id)}>
+                <Icon>delete</Icon>
+              </MDButton>
+            </MDBox> : <MDBox/>}
           </MDBox>
           <MDBox display="flex" alignItems="center">
             <Autocomplete
                 disableClearable
-                value={interval.toString()}
+                value={interval?.toString()}
                 options={entries.map(i => i.toString())}
                 onChange={(event, newValue) => {
                   setInterval(parseInt(newValue));
@@ -165,7 +175,7 @@ function DataTable({
                   color={"info"}
               >
                 {interval > 1 && (
-                    <MDPagination item onClick={() => setInterval(interval - 1)}>
+                    <MDPagination item onClick={() => setInterval((value) => value - 1)}>
                       <Icon sx={{fontWeight: "bold"}}>chevron_left</Icon>
                     </MDPagination>
                 )}
@@ -173,7 +183,7 @@ function DataTable({
                     <MDBox width="5rem" mx={1}>
                       <MDInput
                           inputProps={{type: "number", min: 1, max: pageOptions.length}}
-                          value={pageOptions[interval]}
+                          value={interval}
                           onChange={(handleInputPagination, handleInputPaginationValue)}
                       />
                     </MDBox>
@@ -181,7 +191,7 @@ function DataTable({
                     renderPagination
                 )}
                 {interval < intervals.length && (
-                    <MDPagination item onClick={() => setInterval(interval + 1)}>
+                    <MDPagination item onClick={() => setInterval((value) => value + 1)}>
                       <Icon sx={{fontWeight: "bold"}}>chevron_right</Icon>
                     </MDPagination>
                 )}

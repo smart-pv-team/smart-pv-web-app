@@ -32,19 +32,19 @@ import Header from "layouts/algorithm/components/Header";
 // Images
 import AlgorithmCard from "./components/AlgorithmCard";
 
-function Algorithm({algorithms}) {
+function Algorithm({algorithms, algorithm, setAlgorithm}) {
   return (
       <DashboardLayout>
         <DashboardNavbar/>
         <MDBox mb={2}/>
-        <Header algorithms={algorithms}>
+        <Header setAlgorithm={setAlgorithm} algorithms={algorithms} algorithm={algorithm}>
           <MDBox p={2}>
             <Grid container spacing={6}>
               {algorithms.map((algorithm) => {
                 return (
                     <Grid item xs={12} md={6} xl={3}>
                       <AlgorithmCard
-                          title={algorithm.name}
+                          title={algorithm.name.replaceAll("_", " ")}
                           description={algorithm.description}
                           action={{
                             type: "internal",

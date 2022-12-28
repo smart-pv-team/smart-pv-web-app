@@ -1,21 +1,18 @@
 import {SET_MEASUREMENT_ACTIVE_DEVICES_NUM, SET_MEASUREMENT_DEVICES, SET_MEASUREMENT_DEVICES_NUM} from "./types";
-import {
-  _deleteMeasuringDevice,
-  getMeasuringDevice,
-  getMeasuringDevicesIds,
-  patchMeasuringDevice,
-  postMeasuringDevice
-} from "../api/measurement";
+import {_deleteMeasuringDevice, patchMeasuringDevice, postMeasuringDevice} from "../api/measurement";
 import {StatusCodes} from "http-status-codes";
+import {getFarmMeasuringDevice} from "../api/farm";
 
-export function setMeasurementDevicesNum(num) {
+export function setMeasurementDevicesNum(devices) {
+  const num = devices.length
   return {
     type: SET_MEASUREMENT_DEVICES_NUM,
     devicesNum: num
   }
 }
 
-export function setMeasurementActiveDevicesNum(num) {
+export function setMeasurementActiveDevicesNum(devices) {
+  const num = devices.map((device) => device.isOn).filter(value => value === true).length
   return {
     type: SET_MEASUREMENT_ACTIVE_DEVICES_NUM,
     activeDevicesNum: num
@@ -30,18 +27,15 @@ export function setMeasurementDevices(devices) {
 }
 
 export function fetchMeasuringDevices() {
-  return async (dispatch) => {
-    const deviceIds = await getMeasuringDevicesIds().then(async (e) => await e.json())
-    const devices = await Promise.all(
-        deviceIds.map(async (id) => await getMeasuringDevice(id).then(async (e) => await e.json())));
-
+  return async (dispatch, getState) => {
+    const devices = await getFarmMeasuringDevice(getState().farm.farms[0]?.id).then(async (e) => await e.json())
     dispatch(setMeasurementDevices(devices))
-    dispatch(setMeasurementActiveDevicesNum(devices.length))
-    dispatch(setMeasurementDevicesNum(devices.length))
+    dispatch(setMeasurementActiveDevicesNum(devices))
+    return dispatch(setMeasurementDevicesNum(devices))
   }
 }
 
-export function addNewMeasuringDevice(data) {
+export function addMeasuringDevice(data) {
   console.log(data)
   const measuringDevice = {
     name: data.name,
@@ -57,7 +51,8 @@ export function addNewMeasuringDevice(data) {
         httpMethod: data.httpMethod,
         httpHeaders: data.headers.reduce(
             (obj, item) => Object.assign(obj, {[item.header]: [item.value]}), {}),
-        responseClass: data.responseClass
+        responseClass: data.responseClass,
+        body: data.body
       }
     ]
 

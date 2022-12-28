@@ -26,7 +26,7 @@ import {Link} from "react-router-dom";
 import MDButton from "../../components/MDButton";
 import Grid from "@mui/material/Grid";
 
-export default function ConsumptionDevicesTable(devices, deleteMeasuringDevice) {
+export default function ConsumptionDevicesTable(devices, deleteConsumingDevice) {
   const Device = ({name, deviceModel}) => (
       <MDBox display="flex" alignItems="center" lineHeight={1}>
         <Icon fontSize="small">bolt</Icon>
@@ -59,7 +59,7 @@ export default function ConsumptionDevicesTable(devices, deleteMeasuringDevice) 
                   <MDBadge badgeContent="online" color="success" variant="gradient" size="sm"/>
                 </MDBox>
             ),
-            energy: (
+            workingHours: (
                 <MDTypography component="a" variant="caption" color="text" fontWeight="medium">
                   {device.workingHours} h
                 </MDTypography>
@@ -94,7 +94,7 @@ export default function ConsumptionDevicesTable(devices, deleteMeasuringDevice) 
             ),
             delete: (
                 <MDBox ml={-1}>
-                  <MDButton variant="text" color="error" onClick={() => deleteMeasuringDevice(device.id)}>
+                  <MDButton variant="text" color="error" onClick={() => deleteConsumingDevice(device.id)}>
                     <Icon>delete</Icon>
                   </MDButton>
                 </MDBox>

@@ -37,11 +37,10 @@ import * as yup from "yup";
 import {useFieldArray, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
 import React, {useState} from "react";
-import pattern from "assets/images/illustrations/supla_mew_01.jpeg";
 import CustomSelector from "../../../components/MDSelector";
 import {useParams} from "react-router-dom";
 
-function AddMeasurementDevice({addNewDevice, farmsIds, deviceModels, devices, responseOptions}) {
+function AddMeasurementDevice({addMeasuringDevice, farmsIds, deviceModels, devices, responseOptions}) {
   const schema = yup.object().shape({
     id: yup.string(),
     name: yup.string().required(),
@@ -57,7 +56,8 @@ function AddMeasurementDevice({addNewDevice, farmsIds, deviceModels, devices, re
     endpoint: yup.string().required(),
     httpMethod: yup.string().oneOf(["PATCH", "PUT", "GET", "POST"]).required(),
     description: yup.string(),
-    responseClass: yup.string().required()
+    responseClass: yup.string().required(),
+    body: yup.string()
   });
   const {id} = useParams();
 
@@ -80,6 +80,8 @@ function AddMeasurementDevice({addNewDevice, farmsIds, deviceModels, devices, re
     endpoint: device.endpoints.filter((e) => e.action === "READ")[0].endpoint,
     httpMethod: device.endpoints.filter((e) => e.action === "READ")[0].httpMethod,
     responseClass: device.endpoints.filter((e) => e.action === "READ")[0].responseClass,
+    description: device.endpoints.filter((e) => e.action === "READ")[0].description,
+    body: device.endpoints.filter((e) => e.action === "READ")[0].body,
   } : {}
 
   const {
@@ -94,7 +96,7 @@ function AddMeasurementDevice({addNewDevice, farmsIds, deviceModels, devices, re
   const {fields, append, remove} = useFieldArray({name: 'headers', control});
   const onSubmitHandler = (data) => {
     console.log(data)
-    addNewDevice(data);
+    addMeasuringDevice(data);
   };
 
   return (
@@ -105,25 +107,7 @@ function AddMeasurementDevice({addNewDevice, farmsIds, deviceModels, devices, re
             <Grid container spacing={3}>
               <Grid item xs={12} lg={8}>
                 <Grid container spacing={3}>
-                  <Grid item xs={12} xl={4}>
-                    <Card>
-                      <MDBox
-                          width="100%"
-                          height="100%"
-                          opacity={1}
-                          component="img"
-                          src={pattern}
-                          alt="Device picture"
-                          sx={{
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            height: "17rem",
-                          }}
-                      >
-                      </MDBox>
-                    </Card>
-                  </Grid>
-                  <Grid item xs={12} md={6} xl={4}>
+                  <Grid item xs={12} md={6}>
                     <Card>
                       <MDBox p={2} mx={2} display="flex" justifyContent="center">
                         <Button variant="contained" size="large" onClick={handleOpen}>
@@ -154,7 +138,7 @@ function AddMeasurementDevice({addNewDevice, farmsIds, deviceModels, devices, re
                       </MDBox>
                     </Card>
                   </Grid>
-                  <Grid item xs={12} md={6} xl={4}>
+                  <Grid item xs={12} md={6}>
                     <Card>
                       <MDBox p={2} mx={2} display="flex" justifyContent="center">
                         <Button variant="contained" size="large" onClick={handleSubmit(onSubmitHandler)}>

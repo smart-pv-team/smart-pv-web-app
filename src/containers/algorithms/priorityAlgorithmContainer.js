@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import PriorityAlgorithm from "../../layouts/algorithm/algorithms/priority";
-import {setPriorityPower} from "../../actions/consumptionAction";
+import {setDevicesPower, setDevicesPriority} from "../../actions/consumptionAction";
 
 function mapStateToProps(state, ownProps) {
   const consumptionDevices = state.consumption.devices
@@ -11,7 +11,8 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
   return {
-    setPriorityPower: (data) => dispatch(setPriorityPower(data))
+    setDevicesPower: (data) => dispatch(setDevicesPower(data)),
+    setDevicesPriority: (data) => dispatch(setDevicesPriority(data))
   }
 }
 

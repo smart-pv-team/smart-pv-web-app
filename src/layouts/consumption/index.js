@@ -21,20 +21,17 @@ import Card from "@mui/material/Card";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 
-// Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
-
-// Data
 import MDButton from "../../components/MDButton";
 import Icon from "@mui/material/Icon";
 import consumptionDevicesTable from "./consumptionDevicesTable"
 import {Link} from "react-router-dom";
 
-function Consumption({devices, deleteMeasuringDevice}) {
-  const {columns, rows} = consumptionDevicesTable(devices, deleteMeasuringDevice);
+function Consumption({devices, deleteConsumingDevice}) {
+  const {columns, rows} = consumptionDevicesTable(devices, deleteConsumingDevice);
 
   return (
       <DashboardLayout>
@@ -53,7 +50,6 @@ function Consumption({devices, deleteMeasuringDevice}) {
                     borderRadius="lg"
                     coloredShadow="info"
                 >
-
                   <MDBox px={2} display="flex" justifyContent="space-between" alignItems="center">
                     <MDTypography variant="h6" color="white">
                       Consumption Devices

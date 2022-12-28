@@ -1,37 +1,43 @@
 import {connect} from "react-redux";
 import Algorithm from "../layouts/algorithm";
+import {setAlgorithm} from "../actions/farmAction";
 
 function mapStateToProps(state, ownProps) {
-  //TODO get algorithms from server
+
   const algorithms = [
     {
-      name: "Priority",
+      name: "POWER_PRIORITY",
       description: "Algorithm that base on device priority and power. Favour devices with higher priority. Handle only on/off actions",
       path: "/priority"
     },
     {
-      name: "Time-Priority",
+      name: "POWER_TIME_PRIORITY",
       description: "Algorithm that base on device power. Favour devices with longest inactive time. Handle only on/off actions",
       path: "/time-priority"
     },
     {
-      name: "Random",
+      name: "RANDOM",
       description: "Algorithm that base on device power. Handle only on/off actions",
       path: "/random"
     },
     {
-      name: "Interval",
+      name: "INTERVAL",
       description: "Algorithm that base on actions with specified intervals. Handle all actions",
       path: "/interval"
     }
   ]
+  const algorithm = state.farm.farms[0]?.algorithmType || "RANDOM"
+
   return {
-    algorithms
+    algorithms,
+    algorithm
   };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
-  return {}
+  return {
+    setAlgorithm: (algorithm) => dispatch(setAlgorithm(algorithm))
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Algorithm);

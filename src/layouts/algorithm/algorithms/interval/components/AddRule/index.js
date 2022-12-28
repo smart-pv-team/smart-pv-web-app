@@ -29,10 +29,10 @@ import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
 import CustomSelector from "../../../../../../components/MDSelector";
-import React from "react";
+import React, {useState} from "react";
 
-function AddRule({addInterval, devices, intervals, setInterval}) {
-
+function AddRule({addRule, devices, intervals}) {
+  const [actions, setActions] = useState(["READ", "TURN_ON", "TURN_OFF"]);
   const schema = yup.object().shape({
     device: yup.string().required(),
     action: yup.string().required(),
@@ -40,24 +40,29 @@ function AddRule({addInterval, devices, intervals, setInterval}) {
   });
 
   const {
-    register,
     handleSubmit,
     control,
+    watch,
     formState: {errors},
-    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
+  const watchDevice = watch("device");
+  const updateActions = (value) => {
+    const device = devices.filter(d => d.name === value.device)[0] || undefined;
+    if (device) {
+      setActions(device.endpoints.map(e => e.action))
+    }
+  }
 
+  React.useEffect(() => {
+    const subscription = watch((value, {name, type}) => updateActions(value));
+    return () => subscription.unsubscribe();
+  }, [watchDevice]);
   const onSubmitHandler = (data) => {
-    console.log(data)
-    addInterval(data)
-    reset();
+    addRule(data)
   };
-  //TODO only ui
-  devices = [1, 2, 3];
-  intervals = [1, 2, 3];
-  const actions = [1, 2, 3];
+
   return (
       <Card sx={{mb: 3, p: 2}}>
         <MDBox display="flex" justifyContent="space-between" alignItems="center" pt={3} px={2} pl={3}>
@@ -76,7 +81,7 @@ function AddRule({addInterval, devices, intervals, setInterval}) {
             <Grid item xs={12} md={12}>
               <CustomSelector control={control} errors={errors}
                               icon={<Icon sx={{color: 'action.active'}}>microwave_icon</Icon>}
-                              id="device" label="Device" options={devices}/>
+                              id="device" label="Device" options={devices.map(d => d.name)}/>
             </Grid>
             <Grid item xs={12} md={12}>
               <CustomSelector control={control} errors={errors}
@@ -86,7 +91,7 @@ function AddRule({addInterval, devices, intervals, setInterval}) {
             <Grid item xs={12} md={12}>
               <CustomSelector control={control} errors={errors}
                               icon={<Icon sx={{color: 'action.active'}}>density_large_icon</Icon>}
-                              id="interval" label="Interval" options={intervals}/>
+                              id="interval" label="Interval" options={intervals.map(i => i.name)}/>
             </Grid>
           </Grid>
         </MDBox>

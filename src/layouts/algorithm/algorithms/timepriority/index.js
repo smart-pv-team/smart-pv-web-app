@@ -12,7 +12,7 @@ import * as yup from "yup";
 import {useFieldArray, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
 
-export default function TimePriorityAlgorithm({consumptionDevices, setPower}) {
+export default function TimePriorityAlgorithm({consumptionDevices, setDevicesPower}) {
 
   const schema = yup.object().shape({
     devices: yup.array().of(
@@ -54,7 +54,7 @@ export default function TimePriorityAlgorithm({consumptionDevices, setPower}) {
 
   const onSubmitHandler = (data) => {
     console.log(data)
-    setPower(data);
+    setDevicesPower(data);
   };
 
   const Device = ({device, idx}) => {

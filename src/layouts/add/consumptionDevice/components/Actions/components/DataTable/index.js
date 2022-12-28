@@ -13,7 +13,7 @@
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  */
 
-import {useEffect, useMemo, useState} from "react";
+import {useEffect} from "react";
 
 // prop-types is a library for typechecking of props
 // react-table components
@@ -36,19 +36,23 @@ import MDPagination from "components/MDPagination";
 // Material Dashboard 2 React example components
 import DataTableHeadCell from "examples/Tables/DataTable/DataTableHeadCell";
 import DataTableBodyCell from "examples/Tables/DataTable/DataTableBodyCell";
+import MDButton from "../../../../../../../components/MDButton";
 
 function DataTable({
   canSearch,
+  removeAction,
   showTotalEntries,
   noEndBorder,
-  table,
   actions,
+  action,
+  setAction,
+  table,
 }) {
   const entries = Array.from({length: actions.length}, (_, i) => i + 1)
-  const [action,setAction] = useState(1);
-  const columns = useMemo(() => table.columns, [table]);
-  const data = useMemo(() => table.rows, [table]);
-  const pageOptions = actions.map((i) => i.id);
+
+  const columns = table.columns
+  const data = table.rows
+  const pageOptions = actions.map((i) => i.name);
   const tableInstance = useTable(
       {columns, data},
       useGlobalFilter,
@@ -85,16 +89,20 @@ function DataTable({
       value > pageOptions.length || value < 0 ? setAction(1) : setAction(Number(value));
   const handleInputPaginationValue = ({target: value}) => setAction(Number(value.value));
 
-  const getAction = (_action) => actions.find(i => i.id === _action).action
+  const getAction = (_action) => actions.filter(i => i !== undefined).find(i => i.name === action) || undefined
 
   return (
       <TableContainer sx={{boxShadow: "none"}}>
         <MDBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
           <MDBox display="flex" alignItems="center">
             <MDTypography variant="h6" fontWeight="medium">
-              Action {getAction(action)}
+              {getAction() ? "Action " + `${getAction().action}` : "No action defined"}
             </MDTypography>
-
+            {getAction() ? <MDBox>
+              <MDButton variant="text" color="error" onClick={() => removeAction(getAction().action)}>
+                <Icon>delete</Icon>
+              </MDButton>
+            </MDBox> : <MDBox/>}
           </MDBox>
           <MDBox display="flex" alignItems="center">
             <Autocomplete
@@ -185,6 +193,27 @@ function DataTable({
               </MDPagination>
           )}
         </MDBox>
+        {action && getAction(action) && (
+            <MDBox pl={3}>
+              <MDTypography variant="h6" fontWeight="medium" pt={1}>
+                Details
+              </MDTypography>
+              <MDTypography component="div" variant="button" color="text" fontWeight="light" pt={2}>
+                Endpoint: {getAction(action).endpoint}
+              </MDTypography>
+              <MDTypography component="div" variant="button" color="text" fontWeight="light" pt={1}>
+                HttpMethod: {getAction(action).httpMethod}
+              </MDTypography>
+              <MDTypography component="div" variant="button" color="text" fontWeight="light" pt={1}>
+                ResponseClass: {getAction(action).responseClass}
+              </MDTypography>
+              <MDTypography component="div" variant="button" color="text" fontWeight="light" pt={1}>
+                Description: {getAction(action).description}
+              </MDTypography>
+              <MDTypography component="div" variant="button" color="text" fontWeight="light" pt={1} pb={2}>
+                Body: {getAction(action).body || "{}"}
+              </MDTypography>
+            </MDBox>)}
       </TableContainer>
   );
 }

@@ -30,17 +30,17 @@ import MDTypography from "../../../components/MDTypography";
 import Card from "@mui/material/Card";
 import {Button} from "@mui/material";
 import * as yup from "yup";
-import {useFieldArray, useForm} from "react-hook-form";
+import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import CustomSelector from "../../../components/MDSelector";
 import {useParams} from "react-router-dom";
 import AddHttpHeader from "./components/AddHttpHeader";
 import DeviceInfo from "./components/DeviceInfo";
-import Action from "./components/Action";
+import AddAction from "./components/Action";
 import Actions from "./components/Actions";
 
-function AddConsumptionDevice({addNewDevice, farmsIds, deviceModels, devices, responseOptions}) {
+function AddConsumptionDevice({updateConsumingDevice, farmsIds, deviceModels, devices, responseOptions}) {
   const schema = yup.object().shape({
     id: yup.string(),
     deviceModel: yup.string().required(),
@@ -49,19 +49,16 @@ function AddConsumptionDevice({addNewDevice, farmsIds, deviceModels, devices, re
           action: yup.string().required(),
           description: yup.string(),
           endpoint: yup.string(),
-          headers: yup.array().of(
-              yup.object().shape({
-                header: yup.string(),
-                value: yup.string()
-              })
-          ),
+          httpHeaders: yup.object(),
           httpMethod: yup.string().oneOf(["PATCH", "PUT", "GET", "POST"]).required(),
-          responseClass: yup.string()
+          responseClass: yup.string(),
+          body: yup.string()
         })
     ),
     name: yup.string().required(),
     farmId: yup.string().required(),
     ipAddress: yup.string().required(),
+    isOn: yup.boolean()
   })
 
   const {id} = useParams();
@@ -81,59 +78,81 @@ function AddConsumptionDevice({addNewDevice, farmsIds, deviceModels, devices, re
     name: device.name,
     farmId: device.farmId,
     ipAddress: device.ipAddress,
+    isOn: device.isOn,
   } : {}
-  const [endpoints,setEndpoints] = useState(id? device.endpoints : []);
+  const [endpoints, setEndpoints] = useState(id ? device.endpoints : []);
   const {
     register,
     handleSubmit,
     control,
     formState: {errors},
-      setValue
+    setValue
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: defaultValues,
   });
 
   const addHeader = (data) => {
+    console.log("ADD HEADE");
+    console.log(data);
     setEndpoints((endpoints) => {
-      let endpoint = endpoints.filter((e)=>e.action === data.action)
-      let headers = endpoint.headers
-      let header = {[data.header]: data.value}
-      headers.indexOf(header) === -1 ? headers.push(header) : undefined
-      return {
-        endpoints,
-        endpoint: {
-          ...endpoint,
-          headers: headers
-        }
+      let endpoint = endpoints.filter((e) => e.action === data.action)[0]
+      const idx = endpoints.indexOf(endpoint)
+      if (idx === -1) {
+        return endpoints
       }
+      const httpHeaders = endpoint.httpHeaders || {}
+      httpHeaders[data.header] = [data.value]
+      console.log(httpHeaders)
+      endpoint = {
+        ...endpoint,
+        httpHeaders: httpHeaders
+      }
+      endpoints[idx] = endpoint
+      console.log(endpoints)
+
+      return endpoints
     })
-    setValue("endpoints", endpoints)
   };
+
+  useEffect(() => {
+    setValue("endpoints", endpoints)
+  }, [endpoints])
 
   const addAction = (data) => {
     setEndpoints((endpoints) => {
       const endpoint = {
-        action: data.action,
-        description: data.description,
-        endpoint: data.endpoint,
-        headers: {},
-        httpMethod: data.httpMethod,
-        responseClass: data.responseClass
+        ...data,
+        httpHeaders: data.httpHeaders || {}
       }
-      return {
-        endpoints,
+      return [
+        ...endpoints,
         endpoint
-      }
+      ]
     })
-    setValue("endpoints", endpoints)
   }
-  const removeHttpHeader = (data) => {}
-  const removeAction = (data) => {}
+  const removeHttpHeader = (header, action) => {
+    console.log("remove http header")
+    console.log(header)
+    setEndpoints((endpoints) => {
+      let endpoint = endpoints.filter(e => e.action === action)[0]
+      let httpHeaders = endpoint.httpHeaders
+      delete httpHeaders[Object.keys(header)[0]]
+      const idxEndpoints = endpoints.indexOf(endpoint)
+      endpoints[idxEndpoints] = {...endpoint, httpHeaders: httpHeaders}
+      return endpoints
+    })
+  }
+  const removeAction = (action) => {
+    setEndpoints((endpoints) => {
+      return endpoints.filter(e => e.action !== action)
+    })
+
+  }
   const onSubmitHandler = (data) => {
+    console.log("onSubmitHandler")
     console.log(data)
-    console.log(endpoints)
-    addNewDevice(data);
+    updateConsumingDevice(data);
   };
 
   return (
@@ -203,18 +222,19 @@ function AddConsumptionDevice({addNewDevice, farmsIds, deviceModels, devices, re
               <Grid md={12} item>
                 <DeviceInfo farmsIds={farmsIds} control={control} register={register} errors={errors}/>
               </Grid>
-
+              <Grid md={12} item>
+                <AddHttpHeader
+                    actions={endpoints.length === 0 ? ["First specify action"] : endpoints.map(e => e.action)}
+                    addHeader={addHeader}/>
+              </Grid>
             </Grid>
             <Grid container item justifyContent="flex-start" lg={6} sm={12} spacing={2}>
               <Grid md={12} item>
-                <AddHttpHeader addHeader={addHeader}/>
-              </Grid>
-              <Grid md={12} item>
-                <Action addAction={addAction} responseOptions={["SUPLA_CONSUMPTION_READ_ROW01", "SUPLA_CONSUMPTION_ON_ROW01", "SUPLA_CONSUMPTION_OFF_ROW01"]}/>
+                <AddAction addAction={addAction} responseOptions={responseOptions}/>
               </Grid>
             </Grid>
             <Grid item sm={12}>
-                  <Actions endpoints={endpoints} removeAction={removeAction} removeHttpHeader={removeHttpHeader}/>
+              <Actions endpoints={endpoints} removeAction={removeAction} removeHttpHeader={removeHttpHeader}/>
             </Grid>
           </Grid>
 

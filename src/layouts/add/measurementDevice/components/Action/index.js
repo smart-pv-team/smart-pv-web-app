@@ -36,7 +36,7 @@ function Action({register, errors, control, responseOptions}) {
           </MDTypography>
         </MDBox>
         <MDBox p={1}>
-          <Grid container spacing={3}>
+          <Grid container spacing={1}>
             <Grid item xs={24} md={24}>
               <MDBox
                   borderRadius="lg"
@@ -76,6 +76,22 @@ function Action({register, errors, control, responseOptions}) {
                 <MDInput id="name" label="Description" fullWidth variant="standard"
                          error={errors["description"]?.message} {...register("description")}
                          helperText={errors["description"]?.message}/>
+              </MDBox>
+            </Grid>
+            <Grid item xs={24} md={24}>
+              <MDBox
+                  borderRadius="lg"
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  p={2}
+              >
+                <Icon sx={{color: 'action.active', mr: 1, my: 0.5}}>
+                  document_scanner_icon
+                </Icon>
+                <MDInput id="body" label="Body" fullWidth multiline rows={3} variant="standard"
+                         error={errors["body"]?.message} {...register("body")}
+                         helperText={errors["body"]?.message}/>
               </MDBox>
             </Grid>
           </Grid>

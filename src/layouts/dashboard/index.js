@@ -37,10 +37,17 @@ function Dashboard({
   measurementActiveDevicesNum,
   usersNum,
   farmName,
-  farmAlgorithm
+  farmAlgorithm,
+  running,
+  setFarmRunning
 }) {
-  farmAlgorithm = farmAlgorithm.replaceAll("_", " ").replace("ALGORITHM", "").toLowerCase()
-  farmAlgorithm = farmAlgorithm.charAt(0).toUpperCase() + farmAlgorithm.slice(1);
+  farmAlgorithm = farmAlgorithm?.replaceAll("_", " ").replace("ALGORITHM", "").toLowerCase()
+  farmAlgorithm = farmAlgorithm?.charAt(0).toUpperCase() + farmAlgorithm?.slice(1);
+  const runCondition = consumptionDevicesNum &&
+      measurementDevicesNum &&
+      usersNum &&
+      farmName &&
+      farmAlgorithm
   return (
       <DashboardLayout>
         <DashboardNavbar/>
@@ -49,23 +56,23 @@ function Dashboard({
             <Grid item xs={12} md={6} lg={4}>
               <MDBox mb={1.5}>
                 <ComplexStatisticsCard
-                    color="success"
+                    color={farmName ? "success" : "error"}
                     icon="home"
                     title="Solar Farm"
-                    count={farmName}
+                    count={farmName || "Define farm"}
                 />
               </MDBox>
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
               <MDBox mb={1.5}>
                 <ComplexStatisticsCard
-                    color="success"
+                    color={measurementDevicesNum ? "success" : "error"}
                     icon="bolt"
                     title="Measurement Devices"
-                    count={measurementDevicesNum}
+                    count={measurementDevicesNum || "Add measurement devices"}
                     percentage={{
-                      color: "success",
-                      amount: measurementActiveDevicesNum,
+                      color: `${measurementActiveDevicesNum ? "success" : "error"}`,
+                      amount: measurementActiveDevicesNum || "No",
                       label: "active devices",
                     }}
                 />
@@ -74,13 +81,13 @@ function Dashboard({
             <Grid item xs={12} md={6} lg={4}>
               <MDBox mb={1.5}>
                 <ComplexStatisticsCard
-                    color="success"
+                    color={consumptionDevicesNum ? "success" : "error"}
                     icon="lightbulb"
                     title="Consumption Devices"
-                    count={consumptionDevicesNum}
+                    count={consumptionDevicesNum || "Add consumption devices"}
                     percentage={{
-                      color: "success",
-                      amount: consumptionActiveDevicesNum,
+                      color: `${consumptionActiveDevicesNum ? "success" : "error"}`,
+                      amount: consumptionActiveDevicesNum || "No",
                       label: "active devices",
                     }}
                 />
@@ -89,27 +96,28 @@ function Dashboard({
             <Grid item xs={12} md={6} lg={4}>
               <MDBox mb={1.5}>
                 <ComplexStatisticsCard
-                    color="success"
+                    color={usersNum ? "success" : "error"}
                     icon="person_add"
                     title="Users"
-                    count={usersNum}
+                    count={usersNum || "Define users"}
                 />
               </MDBox>
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
               <MDBox mb={1.5}>
                 <ComplexStatisticsCard
-                    color="success"
+                    color={farmAlgorithm ? "success" : "error"}
                     icon="motion_photos_auto"
                     title="Algorithm"
-                    count={farmAlgorithm}
+                    count={farmAlgorithm || "No defined algorithm"}
                 />
               </MDBox>
             </Grid>
           </Grid>
           <MDBox mt={4.5}>
             <MDBox mb={3}>
-              <ReportsBarChart color="success"/>
+              <ReportsBarChart color={runCondition ? "success" : "error"} setFarmRunning={setFarmRunning}
+                               running={running}/>
             </MDBox>
           </MDBox>
         </MDBox>

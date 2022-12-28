@@ -1,5 +1,13 @@
-import {getDeviceModels, getFarm, getFarmIds, getResponseOptions} from "../api/farm";
+import {
+  getDeviceModels,
+  getFarm,
+  getResponseOptions,
+  patchFarm,
+  patchFarmAlgorithm,
+  patchFarmRunning
+} from "../api/farm";
 import {SET_DEVICE_MODELS, SET_FARMS, SET_RESPONSE_OPTIONS} from "./types";
+import {StatusCodes} from "http-status-codes";
 
 export function setDeviceModels(value) {
   return {
@@ -22,15 +30,60 @@ export function setFarms(value) {
   }
 }
 
-export function fetchFarms() {
+export function fetchFarms(farmId) {
   return async (dispatch) => {
-    const farmIds = await getFarmIds().then(async (e) => await e.json())
-    const farms = await Promise.all(
-        farmIds.map(async (id) => await getFarm(id).then(async (e) => await e.json())));
+    const farm = await getFarm(farmId).then(async (e) => await e.json());
     const deviceModels = await getDeviceModels().then(async (e) => await e.json())
     const responseOptions = await getResponseOptions().then(async (e) => await e.json())
     dispatch(setDeviceModels(deviceModels))
     dispatch(setResponseOptions(responseOptions))
-    dispatch(setFarms(farms))
+    return dispatch(setFarms([farm]))
+  }
+}
+
+export function addFarm(farm) {
+  return async (dispatch) => {
+    try {
+      const response = await patchFarm(farm).then(async (e) => await e.text())
+      if (response) {
+        dispatch(fetchFarms(response))
+      } else {
+        throw new Error(response.status)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
+}
+
+export function setAlgorithm(algorithm) {
+  return async (dispatch, getState) => {
+    try {
+      const farmId = getState().farm.farms[0]?.id
+      const response = await patchFarmAlgorithm(farmId, algorithm)
+      if (response.status === StatusCodes.OK) {
+        dispatch(fetchFarms(farmId))
+      } else {
+        throw new Error(response.status)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
+}
+
+export function setRunning(running) {
+  return async (dispatch, getState) => {
+    try {
+      const farmId = getState().farm.farms[0]?.id
+      const response = await patchFarmRunning(farmId, running)
+      if (response.status === StatusCodes.OK) {
+        dispatch(fetchFarms(farmId))
+      } else {
+        throw new Error(response.status)
+      }
+    } catch (e) {
+      console.log(e)
+    }
   }
 }

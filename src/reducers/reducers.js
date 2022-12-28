@@ -6,6 +6,7 @@ import singUpScreenReducer from "./singUpScreenReducer";
 import measurementReducer from "./measurementReducer";
 import farmReducer from "./farmReducer";
 import consumptionReducer from "./consumptionReducer";
+import algorithmReducer from "./algorithmReducer";
 
 const rootReducer = (state, action) => {
   if (action.type === "RESET_STATE") {
@@ -19,6 +20,7 @@ const rootReducer = (state, action) => {
     measurement: measurementReducer,
     consumption: consumptionReducer,
     farm: farmReducer,
+    algorithm: algorithmReducer,
   })
   return reducers(state, action);
 }

@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import RandomAlgorithm from "../../layouts/algorithm/algorithms/random";
-import {setPriority} from "../../actions/consumptionAction";
+import {setDevicesPower} from "../../actions/consumptionAction";
 
 function mapStateToProps(state, ownProps) {
   const consumptionDevices = state.consumption.devices
@@ -11,7 +11,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
   return {
-    setPriority: (data) => setPriority(data)
+    setDevicesPower: (data) => dispatch(setDevicesPower(data)),
   }
 }
 

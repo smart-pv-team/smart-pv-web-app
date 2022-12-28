@@ -1,7 +1,6 @@
 import {connect} from 'react-redux';
-import AddMeasurementDevice from "../layouts/add/measurementDevice";
-import {addNewMeasuringDevice} from "../actions/measurementAction";
 import AddConsumptionDevice from "../layouts/add/consumptionDevice";
+import {updateConsumingDevice} from "../actions/consumptionAction";
 
 function mapStateToProps(state, ownProps) {
   const deviceModels = state.farm.deviceModels
@@ -18,7 +17,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
   return {
-    /*addNewDevice: (data) => dispatch(addNewConsumptionDevice(data))*/
+    updateConsumingDevice: (device) => dispatch(updateConsumingDevice(device))
   }
 }
 

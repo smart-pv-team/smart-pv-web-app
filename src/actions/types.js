@@ -15,3 +15,5 @@ export const SET_DEVICE_MODELS = "SET_DEVICE_MODELS";
 export const SET_RESPONSE_OPTIONS = "SET_RESPONSE_OPTIONS";
 export const SET_FARMS = "SET_FARMS";
 export const SET_USERS = "SET_USERS";
+export const SET_INTERVALS = "SET_INTERVALS";
+export const SET_RULES = "SET_RULES";

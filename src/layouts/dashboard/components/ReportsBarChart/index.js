@@ -19,7 +19,6 @@ import PauseIcon from '@mui/icons-material/Pause';
 // react-chartjs-2 components
 // @mui material components
 import Card from "@mui/material/Card";
-import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -27,10 +26,13 @@ import MDTypography from "components/MDTypography";
 
 // ReportsBarChart configurations
 import Grid from "@mui/material/Grid";
-import {Button} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
-function ReportsBarChart({color}) {
+function ReportsBarChart({color, running, setFarmRunning}) {
+  const onClick = () => {
+    setFarmRunning(!running)
+  }
   return (
       <Card sx={{height: "100%"}}>
         <MDBox padding="1rem">
@@ -51,8 +53,8 @@ function ReportsBarChart({color}) {
                   width="8rem"
                   height="8rem"
               >
-                <IconButton size="large" fontSize="large" color="inherit">
-                  <PauseIcon/>
+                <IconButton size="large" fontSize="large" color="inherit" onClick={onClick}>
+                  {running ? <PauseIcon/> : <PlayArrowIcon/>}
                 </IconButton>
               </MDBox>
             </Grid>

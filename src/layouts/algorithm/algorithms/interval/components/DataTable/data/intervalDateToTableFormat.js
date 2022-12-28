@@ -55,7 +55,7 @@ export default function intervalDateToTableFormat(intervalData, deleteRule) {
             ),
             interval: (
                 <MDTypography component="a" variant="caption" color="text" fontWeight="medium">
-                  {rule.interval}
+                  {rule.intervalName}
                 </MDTypography>
             ),
             delete: (

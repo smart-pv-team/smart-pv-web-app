@@ -33,11 +33,18 @@ import MDTypography from "components/MDTypography";
 import breakpoints from "assets/theme/base/breakpoints";
 
 // Images
-import backgroundImage from "assets/images/bg-profile.jpeg";
+import backgroundImage from "assets/images/pv_3.jpeg";
 
-function Header({children, algorithms}) {
+function Header({children, algorithms, algorithm, setAlgorithm}) {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
-  const [tabValue, setTabValue] = useState(0);
+
+  const parseNameToReadable = (name) => {
+    return name.replaceAll("_", " ")
+  }
+
+  const parseNameToEnum = (name) => {
+    return name.replaceAll(" ", "_")
+  }
 
   useEffect(() => {
     // A function that sets the orientation state of the tabs.
@@ -59,7 +66,9 @@ function Header({children, algorithms}) {
     return () => window.removeEventListener("resize", handleTabsOrientation);
   }, [tabsOrientation]);
 
-  const handleSetTabValue = (event, newValue) => setTabValue(newValue);
+  const handleSetTabValue = (event, newValue) => {
+    setAlgorithm(newValue)
+  };
 
   return (
       <MDBox position="relative" mb={5}>
@@ -102,11 +111,12 @@ function Header({children, algorithms}) {
             </Grid>
             <Grid item xs={12} md={8} lg={8}>
               <AppBar position="static">
-                <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
+                <Tabs orientation={tabsOrientation} value={algorithm} onChange={handleSetTabValue}>
                   {algorithms.map((algorithm) => {
                     return (
                         <Tab
-                            label={algorithm.name}
+                            label={parseNameToReadable(algorithm.name)}
+                            value={algorithm.name}
                         />
                     );
                   })}
