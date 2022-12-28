@@ -1,4 +1,4 @@
-export const ip = "http://localhost:8080";
+export const ip = "https://smart-pv.herokuapp.com";
 
 // measurement
 
