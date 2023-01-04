@@ -16,7 +16,7 @@ function Algorithm({algorithms, algorithm, setAlgorithm}) {
             <Grid container spacing={6}>
               {algorithms.map((algorithm) => {
                 return (
-                    <Grid item xs={12} md={6} xl={3}>
+                    <Grid item xs={12} md={6} xl={4}>
                       <AlgorithmCard
                           title={algorithm.name.replaceAll("_", " ")}
                           description={algorithm.description}

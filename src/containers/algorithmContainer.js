@@ -15,18 +15,18 @@ function mapStateToProps(state, ownProps) {
       description: "Algorithm that base on device power. Favour devices with longest inactive time. Handle only on/off actions",
       path: "/time-priority"
     },
-    {
+/*    {
       name: "RANDOM",
       description: "Algorithm that base on device power. Handle only on/off actions",
       path: "/random"
-    },
+    },*/
     {
       name: "INTERVAL",
       description: "Algorithm that base on actions with specified intervals. Handle all actions",
       path: "/interval"
     }
   ]
-  const algorithm = state.farm.farms[0]?.algorithmType || "RANDOM"
+  const algorithm = state.farm.farms[0]?.algorithmType || "POWER_TIME_PRIORITY"
 
   return {
     algorithms,
